@@ -129,7 +129,7 @@ export const projects = [
       "fa-brands fa-css3-alt",
     ],
     github: "https://github.com/noemmang/portafolio_2026.git",
-    live: "",
+    live: "https://portafolio-2026-flax-eta.vercel.app",
     details: {
       frontend: "SPA construida en React 18 con Vite como bundler. Arquitectura basada en componentes funcionales y hooks (useState, useEffect, useRef). Animaciones de entrada y transiciones con Framer Motion usando useInView para activarlas al hacer scroll. Navegación entre secciones con scroll suave y detección de sección activa. CSS modular por componente con variables globales, totalmente responsive con CSS Grid y Flexbox.",
       visualizacion: "Árbol de habilidades construido con D3.js usando d3.stratify() y d3.tree() en layout radial. Soporta zoom y pan nativo de D3, tooltips personalizados y animación de pulso CSS en nodos activos. Los nodos y conexiones se colorean por categoría (frontend, backend, tools) y estado (aprendido / pendiente).",
