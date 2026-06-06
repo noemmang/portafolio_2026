@@ -96,7 +96,7 @@ export const skillNodes = [
   { id: "python", label: "Python", icon: "fa-brands fa-python", category: "backend", parent: "root", done: true },
   { id: "laravel", label: "Laravel", icon: "fa-solid fa-l", category: "backend", parent: "php", done: true },
   { id: "springboot", label: "Spring Boot", icon: "fa-solid fa-leaf", category: "backend", parent: "java", done: false },
-  { id: "django", label: "Django", icon: "fa-solid fa-d", category: "backend", parent: "python", done: true },
+  { id: "django", label: "Django", icon: "fa-solid fa-d", category: "backend", parent: "python", done: false },
 
   // TOOLS
   { id: "git", label: "Git", icon: "fa-brands fa-git-alt", category: "tools", parent: "root", done: true },
