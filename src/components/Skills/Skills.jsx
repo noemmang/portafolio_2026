@@ -37,7 +37,7 @@ const POSITIONS = {
   php:        { x: 65, y: 65 },
   python:     { x: 55, y: 65 },
   laravel:    { x: 75, y: 50 },
-  django:     { x: 60, y: 50 },
+  fastapi:    { x: 60, y: 50 },
   springboot: { x: 75, y: 70 },
 
   git:        { x: 45, y: 110 },
@@ -113,7 +113,7 @@ export default function Skills() {
       "fa-brands fa-aws":          "\uf375",
       "fa-solid fa-arrows-rotate": "\uf2f1",
       "fa-solid fa-user":          "\uf007",
-      "fa-solid fa-d":             "DJ",
+      "fa-solid fa-f":             "FA",
     };
 
     const DEVICON_URL = {

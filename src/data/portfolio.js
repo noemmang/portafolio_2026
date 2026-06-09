@@ -7,7 +7,7 @@ export const personal = {
   email: "nnguemamifumu@gmail.com",
   age: 20,
   bioSimple: [
-    "Desarrollador de aplicaciones Full Stack de Madrid, España.",
+    "Desarrollador Web Full Stack de Madrid, España.",
   ],
   bio: [
     "Desarrollador de aplicaciones web con formación Full Stack. Se interesa por participar en todas las etapas del desarrollo de software, desde la interfaz de usuario hasta la lógica del servidor y la gestión de bases de datos.",
@@ -87,7 +87,7 @@ export const skillNodes = [
   { id: "react", label: "React", icon: "fa-brands fa-react", category: "frontend", parent: "javascript", done: true },
   { id: "typescript", label: "TypeScript", icon: "fa-solid fa-t", category: "frontend", parent: "javascript", done: true },
   { id: "nextjs", label: "Next.js", icon: "fa-solid fa-n", category: "frontend", parent: "javascript", done: false },
-  { id: "nodejs", label: "Node.js", icon: "fa-brands fa-node-js", category: "frontend", parent: "javascript", done: true },
+  { id: "nodejs", label: "Node.js", icon: "fa-brands fa-node-js", category: "frontend", parent: "javascript", done: false },
   { id: "express", label: "Express", icon: "fa-solid fa-e",        category: "frontend", parent: "nodejs",     done: false },
 
   // BACKEND
@@ -96,7 +96,7 @@ export const skillNodes = [
   { id: "python", label: "Python", icon: "fa-brands fa-python", category: "backend", parent: "root", done: true },
   { id: "laravel", label: "Laravel", icon: "fa-solid fa-l", category: "backend", parent: "php", done: true },
   { id: "springboot", label: "Spring Boot", icon: "fa-solid fa-leaf", category: "backend", parent: "java", done: false },
-  { id: "django", label: "Django", icon: "fa-solid fa-d", category: "backend", parent: "python", done: false },
+  { id: "fastapi", label: "FastAPI", icon: "fa-solid fa-f", category: "backend", parent: "python", done: false },
 
   // TOOLS
   { id: "git", label: "Git", icon: "fa-brands fa-git-alt", category: "tools", parent: "root", done: true },
@@ -172,7 +172,7 @@ export const projects = [
 
 // ─── EMAILJS ──────────────────────────────────────────────────────────────────
 export const emailConfig = {
-  publicKey: "Kgynd6YTZGXQWxVCN",
-  serviceId: "service_ky9fhfk",
-  templateId: "template_48kbsxv",
+  publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
+  serviceId: import.meta.env.VITE_EMAILJS_SERVICE_ID,
+  templateId: import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
 };
