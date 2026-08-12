@@ -33,20 +33,26 @@ const POSITIONS = {
   nodejs:     { x: 30, y: 45 },
   express:    { x: 40, y: 25 },
 
-  java:       { x: 65, y: 80 },
+  java:       { x: 75, y: 70 },
   php:        { x: 65, y: 65 },
   python:     { x: 55, y: 65 },
   laravel:    { x: 75, y: 50 },
   fastapi:    { x: 60, y: 50 },
-  springboot: { x: 75, y: 70 },
+  springboot: { x: 85, y: 60 },
+  csharp:     { x: 70, y: 85 },
+  puntonet:   { x: 80, y: 85 },
 
   git:        { x: 45, y: 110 },
   github:     { x: 35, y: 105 },
   docker:     { x: 40, y: 125 },
   aws:        { x: 35, y: 140 },
-  mysql:      { x: 60, y: 110 },
-  postgresql: { x: 65, y: 125 },
-  mongodb:    { x: 70, y: 140 },
+  azure:      { x: 45, y: 140 },
+
+  sql:        { x: 58, y: 110 },
+  mysql:      { x: 67, y: 138 },
+  postgresql: { x: 54, y: 128 },
+  sqlserver:  { x: 59, y: 142 },
+  mongodb:    { x: 70, y: 123 },
 };
 
 export default function Skills() {
@@ -69,6 +75,7 @@ export default function Skills() {
 
   // Image cache & draw fn ref
   const imgCache      = useRef({});
+  const iconBuffer    = useRef(null);
   const drawRef       = useRef(null);
   const posRef        = useRef({});
   const zoomStateRef  = useRef({ active: false });
@@ -111,6 +118,7 @@ export default function Skills() {
       "fa-brands fa-github":       "\uf09b",
       "fa-brands fa-docker":       "\uf395",
       "fa-brands fa-aws":          "\uf375",
+      "fa-brands fa-microsoft":    "\uf3ca",
       "fa-solid fa-arrows-rotate": "\uf2f1",
       "fa-solid fa-user":          "\uf007",
       "fa-solid fa-f":             "FA",
@@ -132,6 +140,9 @@ export default function Skills() {
       "devicon-github-original":        "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg",
       "devicon-docker-plain":           "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",
       "devicon-amazonwebservices-plain":"https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg",
+      "devicon-microsoftsqlserver-plain": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain.svg",
+      "devicon-csharp-plain":           "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-plain.svg",
+      "devicon-dot-net-plain":          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dot-net/dot-net-plain.svg",
     };
 
     const loadImage = (url) => new Promise((res) => {
@@ -324,9 +335,32 @@ export default function Skills() {
         const deviconUrl = DEVICON_URL[n.icon];
         if (deviconUrl && imgCache.current[deviconUrl]) {
           const img  = imgCache.current[deviconUrl];
-          const size = (r - 2) * 1.35;
+          const size = Math.ceil((r - 2) * 1.35);
+          const tint = n.done ? color : "#3d5a70";
+
+          // Buffer auxiliar reutilizable
+          if (!iconBuffer.current) {
+            iconBuffer.current = document.createElement("canvas");
+          }
+          const buf  = iconBuffer.current;
+          const bctx = buf.getContext("2d");
+          buf.width  = size;
+          buf.height = size;
+          bctx.clearRect(0, 0, size, size);
+
+          // 1. Dibuja el logo a opacidad completa en el buffer
+          bctx.globalAlpha = 1;
+          bctx.drawImage(img, 0, 0, size, size);
+
+          // 2. Tinta el buffer a opacidad completa (sin bleed-through)
+          bctx.globalCompositeOperation = "source-atop";
+          bctx.fillStyle = tint;
+          bctx.fillRect(0, 0, size, size);
+          bctx.globalCompositeOperation = "source-over";
+
+          // 3. Ahora sí, aplica la opacidad de "pendiente" al resultado ya teñido
           ctx.globalAlpha = n.done ? (isHov ? 1 : 0.9) : 0.3;
-          ctx.drawImage(img, x - size / 2, y - size / 2, size, size);
+          ctx.drawImage(buf, x - size / 2, y - size / 2, size, size);
           ctx.globalAlpha = 1;
         } else if (!deviconUrl) {
           const isBrand = n.icon.startsWith("fa-brands");
