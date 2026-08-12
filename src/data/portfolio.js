@@ -12,7 +12,7 @@ export const personal = {
   bio: [
     "Desarrollador de aplicaciones web con formación Full Stack. Se interesa por participar en todas las etapas del desarrollo de software, desde la interfaz de usuario hasta la lógica del servidor y la gestión de bases de datos.",
     "Inició este camino motivado por la experiencia y el trabajo de otras personas, lo que despertó su interés por crear soluciones tecnológicas que aporten valor a los usuarios.",
-    "Tiene interés por la tecnología, el hardware y el 3D, el cual disfruta con herramientas como Blender y Houdini."
+    "Tiene interés por el cloud computing, el hardware y el 3D, el cual disfruta con herramientas como Blender y Houdini."
   ],
   linkedin: "https://www.linkedin.com/in/noe-mmang-obono",
   github: "https://github.com/noemmang?tab=repositories",

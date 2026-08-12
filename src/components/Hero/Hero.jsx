@@ -108,8 +108,9 @@ export default function Hero() {
             {"  "}<span className="c-prop">stack</span>: [{"\n"}
             {"    "}<span className="c-str">"HTML, CSS3"</span>,{"\n"}
             {"    "}<span className="c-str">"JavaScript, TypeScript, Python, Java"</span>,{"\n"}
-            {"    "}<span className="c-str">"React, Angular, Laravel"</span>,{"\n"}
-            {"    "}<span className="c-str">"MySql, PostgreSQL"</span>,{"\n"}
+            {"    "}<span className="c-str">"React, Angular, Laravel, Node.js"</span>,{"\n"}
+            {"    "}<span className="c-str">"MySQL, PostgreSQL, SQLServer"</span>,{"\n"}
+            {"    "}<span className="c-str">"Git, GitHub, Azure, Docker"</span>,{"\n"}
             {"  "}],{"\n"}
             {"  "}<span className="c-prop">disponible</span>:{" "}
             <span className="c-bool">true</span>,{"\n"}
