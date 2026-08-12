@@ -5,7 +5,7 @@ export const personal = {
   roleEn: "Web Developer",
   location: "Madrid, España",
   email: "nnguemamifumu@gmail.com",
-  age: 20,
+  age: 21,
   bioSimple: [
     "Desarrollador Web Full Stack de Madrid, España.",
   ],
@@ -19,15 +19,15 @@ export const personal = {
   cv: "/documentos/cv_noe_mmang_2026.pdf",
 };
 
-// ─── SOFT SKILLS ─────────────────────────────────────────────────────────────
-export const softSkills = [
-  { label: "Comunicación efectiva", value: 80 },
-  { label: "Desarrollo continuo", value: 85 },
-  { label: "Resiliencia", value: 80 },
-  { label: "Trabajo en equipo", value: 80 },
-  { label: "Proactividad", value: 85 },
-  { label: "Resolución de problemas", value: 80 },
-  { label: "Pensamiento analítico", value: 95 },
+// ─── HARD SKILLS ─────────────────────────────────────────────────────────────
+export const hardSkills = [
+  { label: "Backend", value: 85 },
+  { label: "Frontend", value: 70 },
+  { label: "Bases de datos", value: 90 },
+  { label: "CI/CD", value: 70 },
+  { label: "Cloud/DevOps", value: 70 },
+  { label: "Control de versiones", value: 80 },
+  { label: "Testing", value: 60 },
 ];
 
 // ─── SERVICES ────────────────────────────────────────────────────────────────
@@ -60,18 +60,16 @@ export const experience = [
     company: "Mercanza",
     title: "Desarrollador Web",
     description: [
-      "Participación en el desarrollo de un ERP comercial, donde se implementaron funcionalidades tanto frontend como backend, además de migraciones de base de datos.",
-      "Encargado de la creación de secciones completas, abarcando la gestión de la base de datos, la lógica de negocio (modelos, servicios y controladores) y el desarrollo de una interfaz de usuario fluida y funcional.",
-      "tecnologías usadas: C#, React, SQL, MySQL, PostgreSQL, Visual Studio y control de versiones con Git."
+      "Participación en el desarrollo de un ERP comercial multiempresarial desarrollado sobre ASP.NET Core.",
+      "Desarrollo de funcionalidades frontend fluidas y de servicios backend en C#, incluyendo la implementación de lógica de negocio y acceso a datos.",
+      "Frontend: React, librería DevExtreme. Backend: C#. Herramientas: Visual Studio, Git, GitHub. Bases de datos: SQL Server.",
     ],
     type: "experience",
   },
 ];
 
 export const certificates = [
-  // { title: "Certificado de muestra", id: "xxxxxxx", date: "2026", img: null },
-  // { title: "Certificado de muestra", id: "xxxxxxx", date: "2026", img: null },
-  // { title: "Certificado de muestra", id: "xxxxxxx", date: "2026", img: null },
+  //{ title: "AZ-900: Microsoft Azure Fundamentals", id: "TU-ID-DE-CREDENCIAL", date: "2026", img: null },
 ];
 
 // ─── SKILL TREE ───────────────────────────────────────────────────────────────
@@ -104,6 +102,7 @@ export const skillNodes = [
   { id: "git", label: "Git", icon: "fa-brands fa-git-alt", category: "tools", parent: "root", done: true },
   { id: "github", label: "GitHub", icon: "fa-brands fa-github", category: "tools", parent: "git", done: true },
   { id: "docker", label: "Docker", icon: "fa-brands fa-docker", category: "tools", parent: "git", done: true },
+  { id: "kubernetes", label: "Kubernetes", icon: "devicon-kubernetes-plain", category: "tools", parent: "docker", done: false },
   { id: "aws", label: "AWS", icon: "fa-brands fa-aws", category: "tools", parent: "docker", done: false },
   { id: "azure", label: "Azure", icon: "fa-brands fa-microsoft", category: "tools", parent: "docker", done: true },
 

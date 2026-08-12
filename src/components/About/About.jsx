@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import { personal, softSkills, services } from "../../data/portfolio";
+import { personal, hardSkills, services } from "../../data/portfolio";
 import "./About.css";
 
 function SkillBar({ label, value, index }) {
@@ -66,16 +66,16 @@ export default function About() {
             </ul>
           </motion.div>
 
-          {/* Soft skills */}
+          {/* hard skills */}
           <motion.div
             className="about__right"
             initial={{ opacity: 0, x: 30 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.2 }}
           >
-            <h3 className="about__skills-title">Fortalezas <span className="neon-text">Personales</span></h3>
+            <h3 className="about__skills-title">Fortalezas <span className="neon-text">Profesionales</span></h3>
             <div className="about__skills">
-              {softSkills.map((s, i) => (
+              {hardSkills.map((s, i) => (
                 <SkillBar key={s.label} label={s.label} value={s.value} index={i} />
               ))}
             </div>

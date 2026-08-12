@@ -45,8 +45,9 @@ const POSITIONS = {
   git:        { x: 45, y: 110 },
   github:     { x: 35, y: 105 },
   docker:     { x: 40, y: 125 },
-  aws:        { x: 35, y: 140 },
-  azure:      { x: 45, y: 140 },
+  kubernetes: { x: 30, y: 125 },
+  aws:        { x: 30, y: 140 },
+  azure:      { x: 38, y: 140 },
 
   sql:        { x: 58, y: 110 },
   mysql:      { x: 67, y: 138 },
@@ -143,6 +144,7 @@ export default function Skills() {
       "devicon-microsoftsqlserver-plain": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain.svg",
       "devicon-csharp-plain":           "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-plain.svg",
       "devicon-dot-net-plain":          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dot-net/dot-net-plain.svg",
+      "devicon-kubernetes-plain":       "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg",
     };
 
     const loadImage = (url) => new Promise((res) => {
