@@ -70,6 +70,7 @@ export const experience = [
 
 export const certificates = [
   //{ title: "AZ-900: Microsoft Azure Fundamentals", id: "TU-ID-DE-CREDENCIAL", date: "2026", img: null },
+  //{ title: "AI-901: Microsoft Azure AI Fundamentals", id: "TU-ID-DE-CREDENCIAL", date: "2026", img: null },
 ];
 
 // ─── SKILL TREE ───────────────────────────────────────────────────────────────
