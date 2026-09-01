@@ -114,7 +114,7 @@ export const skillNodes = [
   { id: "typescript", label: "TypeScript", icon: "fa-solid fa-t", category: "frontend", parent: "javascript", done: true },
   { id: "nextjs", label: "Next.js", icon: "fa-solid fa-n", category: "frontend", parent: "javascript", done: false },
   { id: "nodejs", label: "Node.js", icon: "fa-brands fa-node-js", category: "frontend", parent: "javascript", done: true },
-  { id: "express", label: "Express", icon: "fa-solid fa-e",        category: "frontend", parent: "nodejs",     done: false },
+  { id: "express", label: "Express", icon: "fa-solid fa-e",        category: "frontend", parent: "nodejs",     done: true },
 
   // BACKEND
   { id: "java", label: "Java", icon: "fa-brands fa-java", category: "backend", parent: "root", done: true },

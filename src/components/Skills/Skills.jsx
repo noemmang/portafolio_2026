@@ -616,10 +616,7 @@ export default function Skills() {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <p className="section-subtitle">{t("skills.subtitle")}</p>
-          <h2 className="section-title">
-            <span className="neon-text">{t("skills.title")}</span>
-          </h2>
+          <h2 className="section-title">// {t("skills.title")}</h2>
         </motion.div>
 
         <motion.div

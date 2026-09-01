@@ -55,10 +55,7 @@ export default function Education() {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <p className="section-subtitle">{t("education.subtitle")}</p>
-          <h2 className="section-title">
-            {t("education.titlePrefix")} <span className="neon-text">{t("education.titleHighlight")}</span>
-          </h2>
+          <h2 className="section-title">// {t("education.title")}</h2>
         </motion.div>
 
         <div className="education__grid">

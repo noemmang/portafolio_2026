@@ -35,9 +35,7 @@ export const translations = {
       },
     },
     about: {
-      subtitle: "// sobre mí",
-      titlePrefix: "Quién",
-      titleHighlight: "Soy",
+      title: "Quién Soy",
       age: "Edad",
       country: "País",
       email: "Email",
@@ -45,17 +43,14 @@ export const translations = {
       skillsTitleHighlight: "Profesionales",
     },
     education: {
-      subtitle: "// trayectoria",
-      titlePrefix: "Estudios y",
-      titleHighlight: "Experiencia",
+      title: "Trayectoria",
       education: "Formación",
       experience: "Experiencia",
       certificates: "Certificados",
       certId: "ID",
     },
     skills: {
-      subtitle: "// tech stack",
-      title: "Habilidades",
+      title: "Stack tecnológico",
       categories: {
         frontend: "Frontend",
         backend: "Backend",
@@ -67,9 +62,7 @@ export const translations = {
       hint: "Arrastra y usa la rueda del ratón para navegar",
     },
     projects: {
-      subtitle: "// portfolio",
-      titlePrefix: "Mis",
-      titleHighlight: "Proyectos",
+      title: "Mis Proyectos",
       technicalDetails: "Detalles técnicos",
       viewSite: "Ver web",
       imageAlt: "imagen",
@@ -85,9 +78,7 @@ export const translations = {
       },
     },
     contact: {
-      subtitle: "// hablemos",
-      titlePrefix: "¿Cómo puedo",
-      titleHighlight: "Ayudarte?",
+      title: "Hablemos",
       infoText:
         "Estoy disponible para proyectos freelance, colaboraciones o simplemente para charlar sobre tecnología. No dudes en escribirme.",
       email: "Email",
@@ -146,9 +137,7 @@ export const translations = {
       },
     },
     about: {
-      subtitle: "// about me",
-      titlePrefix: "Who I",
-      titleHighlight: "Am",
+      title: "Who I Am",
       age: "Age",
       country: "Country",
       email: "Email",
@@ -156,17 +145,14 @@ export const translations = {
       skillsTitleHighlight: "Strengths",
     },
     education: {
-      subtitle: "// journey",
-      titlePrefix: "Education and",
-      titleHighlight: "Experience",
+      title: "Journey",
       education: "Education",
       experience: "Experience",
       certificates: "Certificates",
       certId: "ID",
     },
     skills: {
-      subtitle: "// tech stack",
-      title: "Skills",
+      title: "Tech stack",
       categories: {
         frontend: "Frontend",
         backend: "Backend",
@@ -178,9 +164,7 @@ export const translations = {
       hint: "Drag and use the mouse wheel to navigate",
     },
     projects: {
-      subtitle: "// portfolio",
-      titlePrefix: "My",
-      titleHighlight: "Projects",
+      title: "My Projects",
       technicalDetails: "Technical details",
       viewSite: "View site",
       imageAlt: "image",
@@ -196,9 +180,7 @@ export const translations = {
       },
     },
     contact: {
-      subtitle: "// let's talk",
-      titlePrefix: "How can I",
-      titleHighlight: "help you?",
+      title: "Let's talk",
       infoText:
         "I'm available for freelance projects, collaborations, or just to chat about technology. Feel free to reach out.",
       email: "Email",

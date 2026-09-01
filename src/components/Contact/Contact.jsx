@@ -41,10 +41,7 @@ export default function Contact() {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <p className="section-subtitle">{t("contact.subtitle")}</p>
-          <h2 className="section-title">
-            {t("contact.titlePrefix")} <span className="neon-text">{t("contact.titleHighlight")}</span>
-          </h2>
+          <h2 className="section-title">// {t("contact.title")}</h2>
         </motion.div>
 
         <div className="contact__grid">

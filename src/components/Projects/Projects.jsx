@@ -231,10 +231,7 @@ export default function Projects() {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <p className="section-subtitle">{t("projects.subtitle")}</p>
-          <h2 className="section-title">
-            {t("projects.titlePrefix")} <span className="neon-text">{t("projects.titleHighlight")}</span>
-          </h2>
+          <h2 className="section-title">// {t("projects.title")}</h2>
         </motion.div>
 
         <div className="projects__grid">

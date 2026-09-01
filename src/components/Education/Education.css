@@ -66,7 +66,7 @@
 
 .timeline-item__company {
   font-size: 0.8rem;
-  color: var(--text-muted);
+  color: var(--accent-green);
 }
 
 .timeline-item__title {

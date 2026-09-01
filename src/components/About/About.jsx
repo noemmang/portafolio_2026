@@ -41,10 +41,7 @@ export default function About() {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <p className="section-subtitle">{t("about.subtitle")}</p>
-          <h2 className="section-title">
-            {t("about.titlePrefix")} <span className="neon-text">{t("about.titleHighlight")}</span>
-          </h2>
+          <h2 className="section-title">// {t("about.title")}</h2>
         </motion.div>
 
         <div className="about__grid">
@@ -75,7 +72,7 @@ export default function About() {
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.2 }}
           >
-            <h3 className="about__skills-title">{t("about.skillsTitlePrefix")} <span className="neon-text">{t("about.skillsTitleHighlight")}</span></h3>
+            <h3 className="about__skills-title">{t("about.skillsTitlePrefix")} {t("about.skillsTitleHighlight")}</h3>
             <div className="about__skills">
               {hardSkills.map((s, i) => (
                 <SkillBar key={s.label[lang]} label={s.label[lang]} value={s.value} index={i} />
