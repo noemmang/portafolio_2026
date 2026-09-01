@@ -95,8 +95,7 @@ export const experience = [
 ];
 
 export const certificates = [
-  //{ title: { es: "AZ-900: Fundamentos de Microsoft Azure", en: "AZ-900: Microsoft Azure Fundamentals" }, id: "TU-ID-DE-CREDENCIAL", date: "2026", img: null },
-  //{ title: { es: "AI-901: Fundamentos de Microsoft Azure AI", en: "AI-901: Microsoft Azure AI Fundamentals" }, id: "TU-ID-DE-CREDENCIAL", date: "2026", img: null },
+  { title: { es: "AZ-900: Fundamentos de Microsoft Azure", en: "AZ-900: Microsoft Azure Fundamentals" }, id: "sTeQ-XMSn", date: "27/08/2026", img: "/img/certificados/Azure%20Fundamentals.pdf", logo: "/img/certificados/Microsoft%20Certified%20Fundamentals.png" },
 ];
 
 // ─── SKILL TREE ───────────────────────────────────────────────────────────────
@@ -114,7 +113,7 @@ export const skillNodes = [
   { id: "typescript", label: "TypeScript", icon: "fa-solid fa-t", category: "frontend", parent: "javascript", done: true },
   { id: "nextjs", label: "Next.js", icon: "fa-solid fa-n", category: "frontend", parent: "javascript", done: false },
   { id: "nodejs", label: "Node.js", icon: "fa-brands fa-node-js", category: "frontend", parent: "javascript", done: true },
-  { id: "express", label: "Express", icon: "fa-solid fa-e",        category: "frontend", parent: "nodejs",     done: true },
+  { id: "express", label: "Express", icon: "fa-solid fa-e",        category: "frontend", parent: "nodejs", done: true },
 
   // BACKEND
   { id: "java", label: "Java", icon: "fa-brands fa-java", category: "backend", parent: "root", done: true },

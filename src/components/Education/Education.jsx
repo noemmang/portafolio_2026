@@ -96,18 +96,28 @@ export default function Education() {
               <i className="fa-solid fa-certificate" /> {t("education.certificates")}
             </h3>
             <div className="certs-grid">
-              {certificates.map((cert, i) => (
-                <div className="cert-card" key={i}>
-                  <div className="cert-card__icon">
-                    <i className="fa-solid fa-award" />
-                  </div>
-                  <div>
-                    <h4 className="cert-card__title">{localized(cert.title, lang)}</h4>
-                    <span className="cert-card__meta">{t("education.certId")}: {cert.id}</span>
-                    <span className="cert-card__meta">{cert.date}</span>
-                  </div>
-                </div>
-              ))}
+              {certificates.map((cert, i) => {
+                const CertTag = cert.img ? "a" : "div";
+                const certProps = cert.img
+                  ? { href: cert.img, target: "_blank", rel: "noopener noreferrer" }
+                  : {};
+                return (
+                  <CertTag className="cert-card" key={i} {...certProps}>
+                    <div className={`cert-card__icon${cert.logo ? " cert-card__icon--logo" : ""}`}>
+                      {cert.logo ? (
+                        <img src={cert.logo} alt="" className="cert-card__logo" />
+                      ) : (
+                        <i className="fa-solid fa-award" />
+                      )}
+                    </div>
+                    <div>
+                      <h4 className="cert-card__title">{localized(cert.title, lang)}</h4>
+                      <span className="cert-card__meta">{t("education.certId")}: {cert.id}</span>
+                      <span className="cert-card__meta">{cert.date}</span>
+                    </div>
+                  </CertTag>
+                );
+              })}
             </div>
           </motion.div>
         )}
