@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { personal, hardSkills, services } from "../../data/portfolio";
+import { useLanguage } from "../../i18n/LanguageContext";
 import "./About.css";
 
 function SkillBar({ label, value, index }) {
@@ -29,6 +30,7 @@ function SkillBar({ label, value, index }) {
 export default function About() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
+  const { lang, t } = useLanguage();
 
   return (
     <section id="sobre-mi" className="about section-pad">
@@ -39,9 +41,9 @@ export default function About() {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <p className="section-subtitle">// sobre mí</p>
+          <p className="section-subtitle">{t("about.subtitle")}</p>
           <h2 className="section-title">
-            Quién <span className="neon-text">Soy</span>
+            {t("about.titlePrefix")} <span className="neon-text">{t("about.titleHighlight")}</span>
           </h2>
         </motion.div>
 
@@ -54,15 +56,15 @@ export default function About() {
             transition={{ duration: 0.7, delay: 0.1 }}
           >
             <div className="about__bio">
-              {personal.bio.map((paragraph, i) => (
+              {personal.bio[lang].map((paragraph, i) => (
                 <p key={i}>{paragraph}</p>
               ))}
             </div>
 
             <ul className="about__data">
-              <li><span className="data__key">Edad</span><span className="data__sep">//</span><span className="data__val">{personal.age}</span></li>
-              <li><span className="data__key">País</span><span className="data__sep">//</span><span className="data__val">{personal.location}</span></li>
-              <li><span className="data__key">Email</span><span className="data__sep">//</span><a href={`mailto:${personal.email}`} className="data__val data__link">{personal.email}</a></li>
+              <li><span className="data__key">{t("about.age")}</span><span className="data__sep">//</span><span className="data__val">{personal.age}</span></li>
+              <li><span className="data__key">{t("about.country")}</span><span className="data__sep">//</span><span className="data__val">{personal.location[lang]}</span></li>
+              <li><span className="data__key">{t("about.email")}</span><span className="data__sep">//</span><a href={`mailto:${personal.email}`} className="data__val data__link">{personal.email}</a></li>
             </ul>
           </motion.div>
 
@@ -73,10 +75,10 @@ export default function About() {
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.2 }}
           >
-            <h3 className="about__skills-title">Fortalezas <span className="neon-text">Profesionales</span></h3>
+            <h3 className="about__skills-title">{t("about.skillsTitlePrefix")} <span className="neon-text">{t("about.skillsTitleHighlight")}</span></h3>
             <div className="about__skills">
               {hardSkills.map((s, i) => (
-                <SkillBar key={s.label} label={s.label} value={s.value} index={i} />
+                <SkillBar key={s.label[lang]} label={s.label[lang]} value={s.value} index={i} />
               ))}
             </div>
           </motion.div>
@@ -89,8 +91,8 @@ export default function About() {
                     <i className={s.icon} />
                   </div>
                   <div>
-                    <h4 className="service-card__title">{s.title}</h4>
-                    <p className="service-card__desc">{s.desc}</p>
+                    <h4 className="service-card__title">{s.title[lang]}</h4>
+                    <p className="service-card__desc">{s.desc[lang]}</p>
                   </div>
                 </div>
               ))}

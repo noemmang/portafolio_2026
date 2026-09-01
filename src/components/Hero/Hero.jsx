@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { personal } from "../../data/portfolio";
+import { useLanguage } from "../../i18n/LanguageContext";
 import "./Hero.css";
 
 const containerVariants = {
@@ -18,6 +19,8 @@ const scrollTo = (id) => {
 };
 
 export default function Hero() {
+  const { lang, t } = useLanguage();
+
   return (
     <section id="home" className="hero">
       {/* Grid bg */}
@@ -45,19 +48,19 @@ export default function Hero() {
 
           {/* Greeting below photo */}
           <motion.p className="hero__greeting section-subtitle" variants={itemVariants}>
-            &lt; Hola, soy {personal.name} /&gt;
+            &lt; {t("hero.greetingPrefix")} {personal.name} /&gt;
           </motion.p>
 
           <motion.p className="hero__bio" variants={itemVariants}>
-            {personal.bioSimple[0]}
+            {personal.bioSimple[lang][0]}
           </motion.p>
 
           <motion.div className="hero__actions" variants={itemVariants}>
             <button className="btn btn--primary" onClick={() => scrollTo("contacto")}>
-              Contactar
+              {t("hero.contact")}
             </button>
             <button className="btn btn--ghost" onClick={() => scrollTo("proyectos")}>
-              Ver proyectos
+              {t("hero.viewProjects")}
             </button>
           </motion.div>
 
@@ -99,20 +102,20 @@ export default function Hero() {
           <pre className="code-card__code">
             <span className="c-keyword">const</span>{" "}
             <span className="c-var">developer</span>{" = {"}
-            {"\n"}{"  "}<span className="c-prop">nombre</span>:{" "}
+            {"\n"}{"  "}<span className="c-prop">{t("hero.code.name")}</span>:{" "}
             <span className="c-str">"{personal.name}"</span>,{"\n"}
-            {"  "}<span className="c-prop">rol</span>:{" "}
-            <span className="c-str">"{personal.role}"</span>,{"\n"}
-            {"  "}<span className="c-prop">ubicacion</span>:{" "}
-            <span className="c-str">"{personal.location}"</span>,{"\n"}
-            {"  "}<span className="c-prop">stack</span>: [{"\n"}
+            {"  "}<span className="c-prop">{t("hero.code.role")}</span>:{" "}
+            <span className="c-str">"{personal.role[lang]}"</span>,{"\n"}
+            {"  "}<span className="c-prop">{t("hero.code.location")}</span>:{" "}
+            <span className="c-str">"{personal.location[lang]}"</span>,{"\n"}
+            {"  "}<span className="c-prop">{t("hero.code.stack")}</span>: [{"\n"}
             {"    "}<span className="c-str">"HTML, CSS3"</span>,{"\n"}
             {"    "}<span className="c-str">"JavaScript, TypeScript, Python, Java"</span>,{"\n"}
             {"    "}<span className="c-str">"React, Angular, Laravel, Node.js"</span>,{"\n"}
             {"    "}<span className="c-str">"MySQL, PostgreSQL, SQLServer"</span>,{"\n"}
             {"    "}<span className="c-str">"Git, GitHub, Azure, Docker"</span>,{"\n"}
             {"  "}],{"\n"}
-            {"  "}<span className="c-prop">disponible</span>:{" "}
+            {"  "}<span className="c-prop">{t("hero.code.available")}</span>:{" "}
             <span className="c-bool">true</span>,{"\n"}
             {"}"};
           </pre>
@@ -126,7 +129,7 @@ export default function Hero() {
         animate={{ opacity: 1 }}
         transition={{ delay: 1.4 }}
       >
-        <span>scroll</span>
+        <span>{t("hero.scroll")}</span>
         <motion.span
           className="hero__scroll-arrow"
           animate={{ y: [0, 6, 0] }}

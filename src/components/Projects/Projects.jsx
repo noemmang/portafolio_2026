@@ -1,10 +1,12 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { projects } from "../../data/portfolio";
+import { useLanguage } from "../../i18n/LanguageContext";
 import "./Projects.css";
 
 // ── Carousel ──────────────────────────────────────────────────────────────────
 function ImageCarousel({ images, title }) {
+  const { t } = useLanguage();
   const [current, setCurrent] = useState(0);
   const timerRef = useRef(null);
 
@@ -44,7 +46,7 @@ function ImageCarousel({ images, title }) {
         <img
           key={src}
           src={src}
-          alt={`${title} — imagen ${i + 1}`}
+          alt={`${title} — ${t("projects.imageAlt")} ${i + 1}`}
           className={`carousel-img ${i === current ? "carousel-img--active" : ""}`}
         />
       ))}
@@ -56,7 +58,7 @@ function ImageCarousel({ images, title }) {
               key={i}
               className={`carousel-dot ${i === current ? "carousel-dot--active" : ""}`}
               onClick={(e) => { e.stopPropagation(); goTo(i); }}
-              aria-label={`Imagen ${i + 1}`}
+              aria-label={`${t("projects.imageAriaLabel")} ${i + 1}`}
             />
           ))}
         </div>
@@ -71,6 +73,9 @@ function ImageCarousel({ images, title }) {
 
 // ── Details Modal ─────────────────────────────────────────────────────────────
 function DetailsModal({ project, onClose }) {
+  const { lang, t } = useLanguage();
+  const details = project.details[lang];
+
   // Close on Escape
   useEffect(() => {
     const onKey = (e) => { if (e.key === "Escape") onClose(); };
@@ -102,7 +107,7 @@ function DetailsModal({ project, onClose }) {
           {/* Header */}
           <div className="modal-panel__header">
             <div>
-              <p className="modal-panel__subtitle">Detalles técnicos</p>
+              <p className="modal-panel__subtitle">{t("projects.technicalDetails")}</p>
               <h3 className="modal-panel__title">{project.title}</h3>
             </div>
             <button className="modal-panel__close" onClick={onClose}>
@@ -117,18 +122,18 @@ function DetailsModal({ project, onClose }) {
             </a>
             {project.live && (
               <a href={project.live} target="_blank" rel="noopener noreferrer" className="modal-link modal-link--live">
-                <i className="fa-solid fa-globe" /> Ver web
+                <i className="fa-solid fa-globe" /> {t("projects.viewSite")}
               </a>
             )}
           </div>
 
           {/* Details */}
           <div className="modal-panel__details">
-            {Object.entries(project.details).map(([k, v]) => (
+            {Object.entries(details).map(([k, v]) => (
               <div className="modal-detail" key={k}>
                 <span className="modal-detail__key">
                   <i className="fa-solid fa-chevron-right" />
-                  {k.charAt(0).toUpperCase() + k.slice(1)}
+                  {t(`projects.detailLabels.${k}`)}
                 </span>
                 <p className="modal-detail__val">{v}</p>
               </div>
@@ -152,6 +157,7 @@ function DetailsModal({ project, onClose }) {
 
 // ── Project Card ──────────────────────────────────────────────────────────────
 function ProjectCard({ project, index, inView }) {
+  const { lang, t } = useLanguage();
   const [modalOpen, setModalOpen] = useState(false);
 
   return (
@@ -173,7 +179,7 @@ function ProjectCard({ project, index, inView }) {
                   <button
                     className="proj-btn proj-btn--info"
                     onClick={() => setModalOpen(true)}
-                    title="Detalles técnicos"
+                    title={t("projects.technicalDetails")}
                   >
                     <i className="fa-solid fa-circle-info" />
                   </button>
@@ -188,7 +194,7 @@ function ProjectCard({ project, index, inView }) {
                 </div>
               </div>
 
-              <p className="project-card__desc">{project.description}</p>
+              <p className="project-card__desc">{project.description[lang]}</p>
 
               <div className="project-card__tags">
                 {project.tags.map((tag, i) => (
@@ -212,6 +218,7 @@ function ProjectCard({ project, index, inView }) {
 
 // ── Section ───────────────────────────────────────────────────────────────────
 export default function Projects() {
+  const { t } = useLanguage();
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
@@ -224,9 +231,9 @@ export default function Projects() {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <p className="section-subtitle">// portfolio</p>
+          <p className="section-subtitle">{t("projects.subtitle")}</p>
           <h2 className="section-title">
-            Mis <span className="neon-text">Proyectos</span>
+            {t("projects.titlePrefix")} <span className="neon-text">{t("projects.titleHighlight")}</span>
           </h2>
         </motion.div>
 

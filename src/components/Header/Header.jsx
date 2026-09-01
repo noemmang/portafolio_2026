@@ -1,17 +1,20 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLanguage } from "../../i18n/LanguageContext";
 import "./Header.css";
 
-const navLinks = [
-  { href: "#home", label: "Home" },
-  { href: "#sobre-mi", label: "Sobre mí" },
-  { href: "#estudios", label: "Estudios" },
-  { href: "#habilidades", label: "Habilidades" },
-  { href: "#proyectos", label: "Proyectos" },
-  { href: "#contacto", label: "Contacto" },
+const navKeys = [
+  { href: "#home", key: "nav.home" },
+  { href: "#sobre-mi", key: "nav.about" },
+  { href: "#estudios", key: "nav.education" },
+  { href: "#habilidades", key: "nav.skills" },
+  { href: "#proyectos", key: "nav.projects" },
+  { href: "#contacto", key: "nav.contact" },
 ];
 
 export default function Header() {
+  const { lang, toggleLang, t } = useLanguage();
+  const navLinks = navKeys.map((l) => ({ ...l, label: t(l.key) }));
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState("#home");
   const [menuOpen, setMenuOpen] = useState(false);
@@ -70,16 +73,28 @@ export default function Header() {
           ))}
         </nav>
 
+        {/* Language switcher */}
+        <button
+          className="header__lang"
+          onClick={toggleLang}
+          aria-label={lang === "es" ? t("langSwitch.switchToEn") : t("langSwitch.switchToEs")}
+          title={lang === "es" ? t("langSwitch.switchToEn") : t("langSwitch.switchToEs")}
+        >
+          <span className={lang === "es" ? "header__lang-active" : ""}>{t("langSwitch.es")}</span>
+          <span className="header__lang-sep">/</span>
+          <span className={lang === "en" ? "header__lang-active" : ""}>{t("langSwitch.en")}</span>
+        </button>
+
         {/* CTA */}
         <a href="/documentos/cv_noe_mmang_2026.pdf" target="_blank" className="header__cta">
-          Descargar CV
+          {t("nav.downloadCV")}
         </a>
 
         {/* Hamburger */}
         <button
           className={`header__hamburger ${menuOpen ? "open" : ""}`}
           onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Menú"
+          aria-label={t("nav.menu")}
         >
           <span />
           <span />
@@ -110,8 +125,19 @@ export default function Header() {
                 {link.label}
               </motion.button>
             ))}
+            <button
+              className="mobile-nav__lang"
+              onClick={toggleLang}
+              aria-label={lang === "es" ? t("langSwitch.switchToEn") : t("langSwitch.switchToEs")}
+            >
+              <i className="fa-solid fa-language" />
+              <span className={lang === "es" ? "header__lang-active" : ""}>{t("langSwitch.es")}</span>
+              <span className="header__lang-sep">/</span>
+              <span className={lang === "en" ? "header__lang-active" : ""}>{t("langSwitch.en")}</span>
+            </button>
+
             <a href="/assets/pdf/NoeMmang_CV.pdf" target="_blank" className="mobile-nav__cta">
-              Descargar CV
+              {t("nav.downloadCV")}
             </a>
           </motion.nav>
         )}

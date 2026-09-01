@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import { motion, useInView } from "framer-motion";
 import { skillNodes } from "../../data/portfolio";
+import { useLanguage } from "../../i18n/LanguageContext";
 import "./Skills.css";
 
 const CATEGORY_COLORS = {
@@ -57,6 +58,7 @@ const POSITIONS = {
 };
 
 export default function Skills() {
+  const { t } = useLanguage();
   const sectionRef = useRef(null);
   const canvasRef  = useRef(null);
   const inView     = useInView(sectionRef, { once: true, margin: "-80px" });
@@ -593,9 +595,9 @@ export default function Skills() {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <p className="section-subtitle">// tech stack</p>
+          <p className="section-subtitle">{t("skills.subtitle")}</p>
           <h2 className="section-title">
-            <span className="neon-text">Habilidades</span>
+            <span className="neon-text">{t("skills.title")}</span>
           </h2>
         </motion.div>
 
@@ -623,7 +625,7 @@ export default function Skills() {
             ))}
             <div className="legend-pill">
               <span className="legend-dot" style={{ background: "#1e2a3a", border: "1px solid #2a3050" }} />
-              <span>Pendiente</span>
+              <span>{t("skills.pending")}</span>
             </div>
           </div>
         </motion.div>
@@ -649,18 +651,18 @@ export default function Skills() {
                 {tooltip.name}
               </strong>
               <span>
-                {tooltip.category} — {tooltip.done ? "✅ Aprendido" : "⏳ Pendiente"}
+                {tooltip.category} — {tooltip.done ? `✅ ${t("skills.learned")}` : `⏳ ${t("skills.pending")}`}
               </span>
             </div>
           )}
 
           <button className="skills__reset" onClick={handleReset}>
-            <i className="fa-solid fa-arrows-to-dot" /> Reiniciar vista
+            <i className="fa-solid fa-arrows-to-dot" /> {t("skills.resetView")}
           </button>
         </motion.div>
 
         <p className="skills__hint">
-          <i className="fa-solid fa-hand-pointer" /> Arrastra y usa la rueda del ratón para navegar
+          <i className="fa-solid fa-hand-pointer" /> {t("skills.hint")}
         </p>
       </div>
     </section>
