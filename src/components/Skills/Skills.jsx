@@ -158,8 +158,11 @@ export default function Skills() {
       img.src = url;
     });
 
-    const FA_FONT  = "900 18px 'Font Awesome 6 Free'";
-    const FAB_FONT = "400 18px 'Font Awesome 6 Brands'";
+    // NOTA: los nombres de familia de fuente dependen de la versión instalada
+    // de @fortawesome/fontawesome-free (ver package.json). La v7 registra las
+    // fuentes como "Font Awesome 7 Free" / "Font Awesome 7 Brands", no "...6...".
+    const FA_FONT  = "900 18px 'Font Awesome 7 Free'";
+    const FAB_FONT = "400 18px 'Font Awesome 7 Brands'";
 
     // ── toPos uses raw canvas dimensions (before transform) ───────────────
     const toPos = (id) => {
@@ -515,12 +518,30 @@ export default function Skills() {
     window.addEventListener("mousemove",  onMouseMove);
     window.addEventListener("mouseup",    onMouseUp);
 
-    // ── Preload images → first draw with fit ──────────────────────────────
+    // ── Preload images + webfonts → first draw with fit ───────────────────
+    // Los iconos FontAwesome se dibujan con ctx.fillText usando la fuente
+    // directamente. Si el canvas dibuja ANTES de que la fuente termine de
+    // cargar, el navegador usa una fuente de reserva sin esos glifos y
+    // se ven cuadros vacíos ("tofu"). document.fonts.load() fuerza la carga
+    // y esperamos a que resuelva antes del primer draw.
+    const loadFonts = () => {
+      if (typeof document === "undefined" || !document.fonts?.load) {
+        return Promise.resolve();
+      }
+      return Promise.all([
+        document.fonts.load(FA_FONT),
+        document.fonts.load(FAB_FONT),
+      ]).catch(() => {
+        // Si la fuente no llega a cargar (red, CDN, etc.) seguimos igualmente;
+        // los iconos con imagen (Devicon) no dependen de esta fuente.
+      });
+    };
+
     const deviconUrls = [...new Set(
       skillNodes.map((n) => DEVICON_URL[n.icon]).filter(Boolean)
     )];
 
-    Promise.all(deviconUrls.map(loadImage)).then(() => {
+    Promise.all([loadFonts(), ...deviconUrls.map(loadImage)]).then(() => {
       resize(true);
     });
 
