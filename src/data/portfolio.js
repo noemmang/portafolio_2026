@@ -24,7 +24,7 @@ export const personal = {
     ],
   },
   linkedin: "https://www.linkedin.com/in/noe-mmang-obono",
-  github: "https://github.com/noemmang?tab=repositories",
+  github: "https://github.com/noemmang",
   cv: "/documentos/cv_noe_mmang_2026.pdf",
 };
 
@@ -166,7 +166,7 @@ export const projects = [
       "fa-brands fa-css3-alt",
     ],
     github: "https://github.com/noemmang/portafolio_2026.git",
-    live: "https://portafolio-2026-flax-eta.vercel.app",
+    live: "https://www.noemmang.com",
     details: {
       es: {
         frontend: "SPA construida en React 18 con Vite como bundler. Arquitectura basada en componentes funcionales y hooks (useState, useEffect, useRef). Animaciones de entrada y transiciones con Framer Motion usando useInView para activarlas al hacer scroll. Navegación entre secciones con scroll suave y detección de sección activa. CSS modular por componente con variables globales, totalmente responsive con CSS Grid y Flexbox.",
@@ -207,7 +207,7 @@ export const projects = [
       "fa-solid fa-chart-line",
     ],
     github: "https://github.com/noemmang/masterBuuild.git",
-    live: "https://master-buuild.vercel.app/home",
+    live: "https://masterbuild.noemmang.com",
     details: {
       es: {
         frontend: "SPA en Angular 17 con arquitectura standalone components. Cada sección (buscador, configurador, comparador, guardados, perfil) está organizada en módulos con sus propios componentes, servicios y modelos TypeScript. Servicios con HttpClient e inyección de dependencias para consumir la API REST. Modo claro/oscuro con variables CSS y persistencia en localStorage.",
