@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "../../i18n/LanguageContext";
+import { personal } from "../../data/portfolio";
 import "./Header.css";
 
 const navKeys = [
@@ -86,7 +87,7 @@ export default function Header() {
         </button>
 
         {/* CTA */}
-        <a href="/documentos/cv_noe_mmang_2026.pdf" target="_blank" className="header__cta">
+        <a href={personal.cv[lang]} target="_blank" rel="noopener noreferrer" className="header__cta">
           {t("nav.downloadCV")}
         </a>
 
@@ -136,7 +137,7 @@ export default function Header() {
               <span className={lang === "en" ? "header__lang-active" : ""}>{t("langSwitch.en")}</span>
             </button>
 
-            <a href="/assets/pdf/NoeMmang_CV.pdf" target="_blank" className="mobile-nav__cta">
+            <a href={personal.cv[lang]} target="_blank" rel="noopener noreferrer" className="mobile-nav__cta">
               {t("nav.downloadCV")}
             </a>
           </motion.nav>

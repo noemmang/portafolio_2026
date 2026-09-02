@@ -25,7 +25,10 @@ export const personal = {
   },
   linkedin: "https://www.linkedin.com/in/noe-mmang-obono",
   github: "https://github.com/noemmang",
-  cv: "/documentos/cv_noe_mmang_2026.pdf",
+  cv: {
+    es: "/documentos/cv noe 2026 ES.pdf",
+    en: "/documentos/cv noe 2026 EN.pdf",
+  },
 };
 
 // ─── HARD SKILLS ─────────────────────────────────────────────────────────────
