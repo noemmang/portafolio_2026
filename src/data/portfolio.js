@@ -3,13 +3,13 @@
 // (no se usa traducción automática) para evitar errores de traducción.
 export const personal = {
   name: "Noe Mmang",
-  role: { es: "Desarrollador Web", en: "Web Developer" },
+  role: { es: "Desarrollador", en: "Developer" },
   location: { es: "Madrid, España", en: "Madrid, Spain" },
   email: "nnguemamifumu@gmail.com",
   age: 21,
   bioSimple: {
-    es: ["Desarrollador Web Full Stack de Madrid, España."],
-    en: ["Full Stack Web Developer based in Madrid, Spain."],
+    es: ["Desarrollador Full Stack de Madrid, España."],
+    en: ["Full Stack Developer from Madrid, Spain."],
   },
   bio: {
     es: [
@@ -39,7 +39,7 @@ export const hardSkills = [
   { label: { es: "CI/CD", en: "CI/CD" }, value: 70 },
   { label: { es: "Cloud/DevOps", en: "Cloud/DevOps" }, value: 70 },
   { label: { es: "Control de versiones", en: "Version control" }, value: 80 },
-  { label: { es: "Testing", en: "Testing" }, value: 60 },
+  { label: { es: "Testing", en: "Testing" }, value: 45 },
 ];
 
 // ─── SERVICES ────────────────────────────────────────────────────────────────
@@ -189,8 +189,8 @@ export const projects = [
     id: 2,
     title: "MasterBuild",
     description: {
-      es: "Comparador de precios de componentes PC en España. Buscador, configurador con compatibilidad, historial de precios 3 años, comparador de specs, visor 3D y alertas de precio.",
-      en: "PC component price comparison tool for Spain. Search engine, compatibility-aware configurator, 3-year price history, spec comparator, 3D viewer and price alerts.",
+      es: "Comparador de precios de componentes de PC en España, con doble enfoque full stack (Angular + Laravel) y cloud/DevOps: scraping real, alertas por email y en la web, configurador con compatibilidad y visor 3D. Desplegado en Azure con dominio propio en Cloudflare.",
+      en: "PC component price comparison tool for Spain, blending full stack (Angular + Laravel) and cloud/DevOps: real scraping, email and in-app alerts, a compatibility-aware configurator and a 3D viewer. Deployed on Azure with a custom domain on Cloudflare.",
     },
     images: [
       "/img/MasterBuild/MasterBuild_1.png",
@@ -199,13 +199,15 @@ export const projects = [
       "/img/MasterBuild/MasterBuild_4.png",
       "/img/MasterBuild/MasterBuild_5.png",
     ],
-    tags: ["Angular", "Laravel", "TypeScript", "PostgreSQL", "PHP", "Three.js", "ApexCharts"],
+    tags: ["Angular", "Laravel", "TypeScript", "PostgreSQL", "Azure", "Docker", "Cloudflare", "Three.js", "ApexCharts"],
     tagIcons: [
       "fa-brands fa-angular",
       "fa-solid fa-l",
       "fa-solid fa-t",
       "fa-solid fa-database",
-      "fa-brands fa-php",
+      "fa-brands fa-microsoft",
+      "fa-brands fa-docker",
+      "fa-brands fa-cloudflare",
       "fa-solid fa-cube",
       "fa-solid fa-chart-line",
     ],
@@ -213,18 +215,18 @@ export const projects = [
     live: "https://masterbuild.noemmang.com",
     details: {
       es: {
-        frontend: "SPA en Angular 17 con arquitectura standalone components. Cada sección (buscador, configurador, comparador, guardados, perfil) está organizada en módulos con sus propios componentes, servicios y modelos TypeScript. Servicios con HttpClient e inyección de dependencias para consumir la API REST. Modo claro/oscuro con variables CSS y persistencia en localStorage.",
-        backend: "API REST construida en Laravel (PHP). Estructura MVC completa: controladores por recurso (ComponenteController, ConfiguracionController, AlertaController…), modelos Eloquent con relaciones, migraciones para el esquema de base de datos y seeders para poblar datos iniciales de componentes y tiendas. Autenticación con Laravel Sanctum.",
-        database: "PostgreSQL alojado en Neon (serverless). Esquema relacional con tablas de componentes, tiendas, precios históricos, usuarios, configuraciones guardadas y alertas de precio. El historial de precios almacena registros mensuales por tienda, permitiendo consultas de hasta 3 años atrás filtradas por período y tienda.",
-        features: "Buscador filtrado por tipo de componente con barra lateral de tiendas, precios, cupones y regalos. Configurador con filtrado por compatibilidad y dimensiones. Historial de precios con gráficas ApexCharts (línea media + rango min-máx, anotaciones de mínimo y máximo histórico). Visor 3D de dimensiones de PC con Three.js. Comparador de especificaciones técnicas. Alertas de bajada de precio y guardado de componentes y configuraciones completas.",
-        deployment: "Frontend desplegado en Vercel, backend Laravel en Railway. Base de datos PostgreSQL en Neon.",
+        frontend: "SPA en Angular 21 con arquitectura standalone components y Signals para el estado reactivo (por ejemplo, el contador de notificaciones no leídas). Organización por features (buscador, configurador, comparador de specs, visor de gabinetes, guardados, perfil, auth), cada una con sus propios componentes, servicios y modelos TypeScript. Servicios con HttpClient e interceptores para consumir la API REST. Modo claro/oscuro con variables CSS y persistencia en localStorage.",
+        backend: "API REST en Laravel 13 (PHP 8.4) sobre FrankenPHP, empaquetada en Docker. Estructura MVC completa: controladores por recurso, modelos Eloquent con relaciones, migraciones y seeders. Autenticación con Laravel Sanctum. Los scrapers de cada tienda (Coolmod, Neobyte…) implementan una interfaz común y extraen los datos JSON-LD (schema.org/Product) directamente de la ficha de producto real.",
+        database: "PostgreSQL alojado en Neon (serverless). Esquema relacional con componentes, tiendas, precios actuales e históricos, usuarios, configuraciones guardadas y alertas de precio. El historial permite consultar hasta 3 años de precios por componente y tienda.",
+        cloud: "Infraestructura 100% en Azure: frontend en Static Web Apps, backend y scraping en Container Apps. Un Container Apps Job programado (cron diario) ejecuta el scraping real y, justo después, revisa las alertas de precio pendientes. CI/CD con GitHub Actions: un workflow construye y publica el frontend en cada push a main, y otro construye la imagen Docker del backend, la sube a Azure Container Registry y actualiza tanto la Container App como el Job con el nuevo tag. Dominio propio (masterbuild.noemmang.com) gestionado en Cloudflare.",
+        features: "Buscador filtrado por tipo de componente con precios reales de varias tiendas (scraping real, ya no datos ficticios). Configurador con filtrado por compatibilidad y dimensiones. Historial de precios con gráficas ApexCharts (línea media + rango min-máx, anotaciones de mínimo y máximo histórico). Visor 3D de dimensiones de PC con Three.js. Comparador de especificaciones técnicas. Alertas de bajada de precio con aviso por email y en la web (panel de notificaciones con contador en tiempo real). Guardado de componentes y configuraciones completas.",
       },
       en: {
-        frontend: "SPA in Angular 17 with a standalone components architecture. Each section (search, configurator, comparator, saved items, profile) is organized into modules with their own components, services and TypeScript models. Services use HttpClient and dependency injection to consume the REST API. Light/dark mode with CSS variables and localStorage persistence.",
-        backend: "REST API built with Laravel (PHP). Full MVC structure: resource controllers (ComponenteController, ConfiguracionController, AlertaController…), Eloquent models with relationships, migrations for the database schema and seeders to populate initial component and store data. Authentication with Laravel Sanctum.",
-        database: "PostgreSQL hosted on Neon (serverless). Relational schema with tables for components, stores, historical prices, users, saved configurations and price alerts. The price history stores monthly records per store, allowing queries up to 3 years back filtered by period and store.",
-        features: "Search engine filtered by component type with a sidebar for stores, prices, coupons and freebies. Configurator with compatibility and dimension filtering. Price history with ApexCharts graphs (average line + min-max range, historical min/max annotations). 3D PC-dimension viewer built with Three.js. Technical spec comparator. Price-drop alerts and saving of components and full configurations.",
-        deployment: "Frontend deployed on Vercel, Laravel backend on Railway. PostgreSQL database on Neon.",
+        frontend: "SPA in Angular 21 with a standalone components architecture and Signals for reactive state (e.g. the unread-notifications counter). Organized by feature (search, configurator, spec comparator, case viewer, saved items, profile, auth), each with its own components, services and TypeScript models. Services use HttpClient and interceptors to consume the REST API. Light/dark mode with CSS variables and localStorage persistence.",
+        backend: "REST API in Laravel 13 (PHP 8.4) on FrankenPHP, packaged in Docker. Full MVC structure: resource controllers, Eloquent models with relationships, migrations and seeders. Authentication with Laravel Sanctum. Each store's scraper (Coolmod, Neobyte…) implements a common interface and extracts JSON-LD (schema.org/Product) data straight from the real product page.",
+        database: "PostgreSQL hosted on Neon (serverless). Relational schema with components, stores, current and historical prices, users, saved configurations and price alerts. The history allows querying up to 3 years of prices per component and store.",
+        cloud: "Infrastructure fully on Azure: frontend on Static Web Apps, backend and scraping on Container Apps. A scheduled Container Apps Job (daily cron) runs the real scraping and, right after, checks pending price alerts. CI/CD with GitHub Actions: one workflow builds and publishes the frontend on every push to main, and another builds the backend's Docker image, pushes it to Azure Container Registry and updates both the Container App and the Job with the new tag. Custom domain (masterbuild.noemmang.com) managed on Cloudflare.",
+        features: "Search engine filtered by component type with real prices from several stores (real scraping, no more mock data). Configurator with compatibility and dimension filtering. Price history with ApexCharts graphs (average line + min-max range, historical min/max annotations). 3D PC-dimension viewer built with Three.js. Technical spec comparator. Price-drop alerts sent by email and in-app (a notification panel with a live counter). Saving of components and full configurations.",
       },
     },
   },

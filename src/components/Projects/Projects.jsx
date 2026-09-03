@@ -14,7 +14,7 @@ function ImageCarousel({ images, title }) {
     if (!images || images.length <= 1) return;
     timerRef.current = setInterval(() => {
       setCurrent((c) => (c + 1) % images.length);
-    }, 2800);
+    }, 3600);
   };
 
   const stopTimer = () => clearInterval(timerRef.current);
