@@ -27,7 +27,8 @@ const POSITIONS = {
   html:       { x: 35, y: 80 },
   css:        { x: 25, y: 70 },
   javascript: { x: 20, y: 55 },
-  typescript: { x: 10,  y: 45 },
+  typescript: { x: 10, y: 45 },
+  threejs:    { x: 10, y: 62 },
   angular:    { x: 0,  y: 25 },
   react:      { x: 15, y: 25 },
   nextjs:     { x: 25, y: 25 },
@@ -147,6 +148,7 @@ export default function Skills() {
       "devicon-csharp-plain":           "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-plain.svg",
       "devicon-dot-net-plain":          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dot-net/dot-net-plain.svg",
       "devicon-kubernetes-plain":       "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg",
+      "devicon-threejs-original":       "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/threejs/threejs-original.svg",
     };
 
     const loadImage = (url) => new Promise((res) => {

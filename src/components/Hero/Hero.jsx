@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { personal } from "../../data/portfolio";
 import { useLanguage } from "../../i18n/LanguageContext";
+import GamingScene from "./3dScene";
 import "./Hero.css";
 
 const containerVariants = {
@@ -48,8 +49,12 @@ export default function Hero() {
 
           {/* Greeting below photo */}
           <motion.p className="hero__greeting section-subtitle" variants={itemVariants}>
-            &lt; {t("hero.greetingPrefix")} {personal.name} /&gt;
+            &lt; {t("hero.greetingPrefix")} /&gt;
           </motion.p>
+
+          <motion.h1 className="hero__name" variants={itemVariants}>
+            {personal.name}
+          </motion.h1>
 
           <motion.p className="hero__bio" variants={itemVariants}>
             {personal.bioSimple[lang][0]}
@@ -87,7 +92,15 @@ export default function Hero() {
           </motion.div>
         </motion.div>
 
-        {/* Floating code block */}
+        {/* 3D + floating code block, en la misma columna */}
+        <div className="hero__visuals">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.94 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.9, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
+        >
+          <GamingScene />
+        </motion.div>
         <motion.div
           className="hero__code-card"
           initial={{ opacity: 0, x: 60, rotate: 3 }}
@@ -120,6 +133,7 @@ export default function Hero() {
             {"}"};
           </pre>
         </motion.div>
+        </div>
       </div>
 
       {/* Scroll indicator */}

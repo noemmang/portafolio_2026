@@ -1,0 +1,43 @@
+.ambient-fx {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.ambient-fx__firefly {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--accent-purple);
+  box-shadow: 0 0 8px 2px var(--accent-purple);
+  opacity: 0.55;
+  animation: ambient-drift 6s ease-in-out infinite;
+}
+
+@keyframes ambient-drift {
+  0%, 100% { transform: translate(0, 0); opacity: 0.35; }
+  50% { transform: translate(-12px, -16px); opacity: 0.85; }
+}
+
+.ambient-fx__diamond {
+  position: absolute;
+  background: var(--accent-green);
+  border-radius: 6px;
+  transform: rotate(45deg);
+  opacity: 0.4;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
+  animation: ambient-bob 5s ease-in-out infinite;
+}
+
+@keyframes ambient-bob {
+  0%, 100% { transform: rotate(45deg) translateY(0); }
+  50% { transform: rotate(45deg) translateY(-14px); }
+}
+
+@media (max-width: 640px) {
+  .ambient-fx__diamond { display: none; }
+  .ambient-fx__firefly:nth-child(n+5) { display: none; }
+}
