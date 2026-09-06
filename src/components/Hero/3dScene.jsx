@@ -14,7 +14,6 @@ const MODEL_URLS = [
   "/models/hero_3d_model_1.glb",
   "/models/hero_3d_model_2.glb",
   "/models/hero_3d_model_3.glb",
-  "/models/hero_3d_model_4.glb",
 ];
 
 // Precargamos TODOS los modelos posibles (no solo el elegido), así si el
