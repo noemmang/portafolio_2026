@@ -158,7 +158,6 @@ export const projects = [
     },
     images: [
       "/img/portafolio-2026/portafolio2026_1.png",
-      "/img/portafolio-2026/portafolio2026_2.png",
     ],
     tags: ["React", "Vite", "Three.js", "D3.js", "Framer Motion", "EmailJS", "CSS3"],
     tagIcons: [
@@ -196,10 +195,6 @@ export const projects = [
     },
     images: [
       "/img/MasterBuild/MasterBuild_1.png",
-      "/img/MasterBuild/MasterBuild_2.png",
-      "/img/MasterBuild/MasterBuild_3.png",
-      "/img/MasterBuild/MasterBuild_4.png",
-      "/img/MasterBuild/MasterBuild_5.png",
     ],
     tags: ["Angular", "Laravel", "TypeScript", "PostgreSQL", "Azure", "Docker", "Cloudflare", "Three.js", "ApexCharts"],
     tagIcons: [
