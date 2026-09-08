@@ -44,18 +44,21 @@ const POSITIONS = {
   csharp:     { x: 70, y: 85 },
   puntonet:   { x: 80, y: 85 },
 
-  git:        { x: 45, y: 110 },
-  github:     { x: 35, y: 105 },
-  docker:     { x: 40, y: 125 },
-  kubernetes: { x: 30, y: 125 },
-  aws:        { x: 30, y: 140 },
-  azure:      { x: 38, y: 140 },
+  git:        { x: 50, y: 110 },
+  github:     { x: 55, y: 125 },
+  docker:     { x: 45, y: 125 },
+  kubernetes: { x: 42, y: 142 },
+  githubactions: { x: 56, y: 142 },
 
-  sql:        { x: 58, y: 110 },
-  mysql:      { x: 67, y: 138 },
-  postgresql: { x: 54, y: 128 },
-  sqlserver:  { x: 59, y: 142 },
-  mongodb:    { x: 70, y: 123 },
+  cloud:      { x: 40, y: 105 },
+  azure:      { x: 32, y: 120 },
+  aws:        { x: 30, y: 105 },
+
+  sql:        { x: 63, y: 110 },
+  mysql:      { x: 75, y: 135 },
+  postgresql: { x: 75, y: 113 },
+  sqlserver:  { x: 68, y: 142 },
+  mongodb:    { x: 81, y: 124 },
 };
 
 export default function Skills() {
@@ -123,6 +126,7 @@ export default function Skills() {
       "fa-brands fa-docker":       "\uf395",
       "fa-brands fa-aws":          "\uf375",
       "fa-brands fa-microsoft":    "\uf3ca",
+      "fa-solid fa-cloud":         "\uf0c2",
       "fa-solid fa-arrows-rotate": "\uf2f1",
       "fa-solid fa-user":          "\uf007",
       "fa-solid fa-f":             "FA",
@@ -149,6 +153,8 @@ export default function Skills() {
       "devicon-dot-net-plain":          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dot-net/dot-net-plain.svg",
       "devicon-kubernetes-plain":       "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg",
       "devicon-threejs-original":       "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/threejs/threejs-original.svg",
+      "devicon-githubactions-plain":    "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/githubactions/githubactions-plain.svg",
+      "devicon-laravel-original":       "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg",
     };
 
     const loadImage = (url) => new Promise((res) => {
@@ -163,8 +169,8 @@ export default function Skills() {
     // NOTA: los nombres de familia de fuente dependen de la versión instalada
     // de @fortawesome/fontawesome-free (ver package.json). La v7 registra las
     // fuentes como "Font Awesome 7 Free" / "Font Awesome 7 Brands", no "...6...".
-    const FA_FONT  = "900 18px 'Font Awesome 7 Free'";
-    const FAB_FONT = "400 18px 'Font Awesome 7 Brands'";
+    const FA_FONT  = "900 30px 'Font Awesome 7 Free'";
+    const FAB_FONT = "400 30px 'Font Awesome 7 Brands'";
 
     // ── toPos uses raw canvas dimensions (before transform) ───────────────
     const toPos = (id) => {
@@ -344,7 +350,7 @@ export default function Skills() {
         const deviconUrl = DEVICON_URL[n.icon];
         if (deviconUrl && imgCache.current[deviconUrl]) {
           const img  = imgCache.current[deviconUrl];
-          const size = Math.ceil((r - 2) * 1.35);
+          const size = Math.ceil((r - 2) * 1.0);
           const tint = n.done ? color : "#3d5a70";
 
           // Buffer auxiliar reutilizable

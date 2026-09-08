@@ -123,19 +123,22 @@ export const skillNodes = [
   { id: "java", label: "Java", icon: "fa-brands fa-java", category: "backend", parent: "root", done: true },
   { id: "php", label: "PHP", icon: "fa-brands fa-php", category: "backend", parent: "root", done: true },
   { id: "python", label: "Python", icon: "fa-brands fa-python", category: "backend", parent: "root", done: true },
-  { id: "laravel", label: "Laravel", icon: "fa-solid fa-l", category: "backend", parent: "php", done: true },
-  { id: "springboot", label: "Spring Boot", icon: "fa-solid fa-leaf", category: "backend", parent: "java", done: false },
+  { id: "laravel", label: "Laravel", icon: "devicon-laravel-original", category: "backend", parent: "php", done: true },  { id: "springboot", label: "Spring Boot", icon: "fa-solid fa-leaf", category: "backend", parent: "java", done: false },
   { id: "fastapi", label: "FastAPI", icon: "fa-solid fa-f", category: "backend", parent: "python", done: false },
   { id: "csharp", label: "C#", icon: "devicon-csharp-plain", category: "backend", parent: "root", done: true },
-  { id: "puntonet", label: ".NET Framework", icon: "devicon-dot-net-plain", category: "backend", parent: "csharp", done: false },
+  { id: "puntonet", label: ".NET", icon: "devicon-dot-net-plain", category: "backend", parent: "csharp", done: false },
 
   // TOOLS
   { id: "git", label: "Git", icon: "fa-brands fa-git-alt", category: "tools", parent: "root", done: true },
   { id: "github", label: "GitHub", icon: "fa-brands fa-github", category: "tools", parent: "git", done: true },
   { id: "docker", label: "Docker", icon: "fa-brands fa-docker", category: "tools", parent: "git", done: true },
+  { id: "githubactions", label: "GitHub Actions", icon: "devicon-githubactions-plain", category: "tools", parent: "github", done: true },
   { id: "kubernetes", label: "Kubernetes", icon: "devicon-kubernetes-plain", category: "tools", parent: "docker", done: false },
-  { id: "aws", label: "AWS", icon: "fa-brands fa-aws", category: "tools", parent: "docker", done: false },
-  { id: "azure", label: "Azure", icon: "fa-brands fa-microsoft", category: "tools", parent: "docker", done: true },
+
+  // CLOUD (rama propia colgando de root)
+  { id: "cloud", label: "Cloud", icon: "fa-solid fa-cloud", category: "tools", parent: "root", done: true },
+  { id: "aws", label: "AWS", icon: "fa-brands fa-aws", category: "tools", parent: "cloud", done: false },
+  { id: "azure", label: "Azure", icon: "fa-brands fa-microsoft", category: "tools", parent: "cloud", done: true },
 
   { id: "sql", label: "SQL", icon: "fa-solid fa-database", category: "tools", parent: "root", done: true },
   { id: "mysql", label: "MySQL", icon: "devicon-mysql-plain", category: "tools", parent: "sql", done: true },
