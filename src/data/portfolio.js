@@ -117,14 +117,14 @@ export const skillNodes = [
   { id: "threejs", label: "Three.js", icon: "devicon-threejs-original", category: "frontend", parent: "javascript", done: true },
   { id: "nextjs", label: "Next.js", icon: "fa-solid fa-n", category: "frontend", parent: "javascript", done: false },
   { id: "nodejs", label: "Node.js", icon: "fa-brands fa-node-js", category: "frontend", parent: "javascript", done: true },
-  { id: "express", label: "Express", icon: "fa-solid fa-e",        category: "frontend", parent: "nodejs", done: true },
+  { id: "express", label: "Express", icon: "devicon-express-original", category: "frontend", parent: "nodejs", done: true },
 
   // BACKEND
   { id: "java", label: "Java", icon: "fa-brands fa-java", category: "backend", parent: "root", done: true },
   { id: "php", label: "PHP", icon: "fa-brands fa-php", category: "backend", parent: "root", done: true },
   { id: "python", label: "Python", icon: "fa-brands fa-python", category: "backend", parent: "root", done: true },
   { id: "laravel", label: "Laravel", icon: "devicon-laravel-original", category: "backend", parent: "php", done: true },  { id: "springboot", label: "Spring Boot", icon: "fa-solid fa-leaf", category: "backend", parent: "java", done: false },
-  { id: "fastapi", label: "FastAPI", icon: "fa-solid fa-f", category: "backend", parent: "python", done: false },
+  { id: "fastapi", label: "FastAPI", icon: "devicon-fastapi-plain", category: "backend", parent: "python", done: false },
   { id: "csharp", label: "C#", icon: "devicon-csharp-plain", category: "backend", parent: "root", done: true },
   { id: "puntonet", label: ".NET", icon: "devicon-dot-net-plain", category: "backend", parent: "csharp", done: false },
 

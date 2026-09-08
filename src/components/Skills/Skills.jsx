@@ -155,6 +155,10 @@ export default function Skills() {
       "devicon-threejs-original":       "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/threejs/threejs-original.svg",
       "devicon-githubactions-plain":    "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/githubactions/githubactions-plain.svg",
       "devicon-laravel-original":       "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg",
+      "devicon-typescript-plain":       "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
+      "devicon-express-original":       "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg",
+      "devicon-fastapi-plain":          "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-plain.svg",
+      "devicon-nextjs-original":        "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
     };
 
     const loadImage = (url) => new Promise((res) => {
@@ -388,7 +392,7 @@ export default function Skills() {
           if (glyph && glyph.length === 1) {
             ctx.fillText(glyph, x, y);
           } else if (glyph) {
-            ctx.font = `bold 11px 'Space Mono', monospace`;
+            ctx.font = `bold 25px 'Space Mono', monospace`;
             ctx.fillText(glyph, x, y);
           }
           ctx.globalAlpha = 1;
