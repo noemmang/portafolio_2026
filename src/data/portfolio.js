@@ -98,7 +98,8 @@ export const experience = [
 ];
 
 export const certificates = [
-  { title: { es: "AZ-900: Fundamentos de Microsoft Azure", en: "AZ-900: Microsoft Azure Fundamentals" }, id: "sTeQ-XMSn", date: "27/08/2026", img: "/img/certificados/Azure%20Fundamentals.pdf", logo: "/img/certificados/Microsoft%20Certified%20Fundamentals.png" },
+  { title: { es: "AZ-900: Fundamentos de Microsoft Azure", en: "AZ-900: Microsoft Azure Fundamentals" }, id: "sTeQ-XMSn", date: "27/08/2026", img: "/img/certificados/Azure_Fundamentals.pdf", logo: "/img/certificados/Microsoft%20Certified%20Fundamentals.png" },
+  { title: { es: "DP-900: Fundamentos de Microsoft Azure Data", en: "DP-900: Microsoft Azure Data Fundamentals" }, id: "nsh7-DwWh", date: "28/09/2026", img: "/img/certificados/Azure_Data_Fundamentals.pdf", logo: "/img/certificados/microsoft-certified-azure-data-fundamentals.png" },
 ];
 
 // ─── SKILL TREE ───────────────────────────────────────────────────────────────
@@ -126,7 +127,7 @@ export const skillNodes = [
   { id: "laravel", label: "Laravel", icon: "devicon-laravel-original", category: "backend", parent: "php", done: true },  { id: "springboot", label: "Spring Boot", icon: "fa-solid fa-leaf", category: "backend", parent: "java", done: false },
   { id: "fastapi", label: "FastAPI", icon: "devicon-fastapi-plain", category: "backend", parent: "python", done: false },
   { id: "csharp", label: "C#", icon: "devicon-csharp-plain", category: "backend", parent: "root", done: true },
-  { id: "puntonet", label: ".NET", icon: "devicon-dot-net-plain", category: "backend", parent: "csharp", done: false },
+  { id: "puntonet", label: ".NET", icon: "devicon-dot-net-plain", category: "backend", parent: "csharp", done: true },
 
   // TOOLS
   { id: "git", label: "Git", icon: "fa-brands fa-git-alt", category: "tools", parent: "root", done: true },
