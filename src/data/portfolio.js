@@ -231,6 +231,44 @@ export const projects = [
       },
     },
   },
+  {
+    id: 3,
+    title: "MisterHost",
+    description: {
+      es: "Gestión de reservas de alojamiento en PHP nativo, sin framework, hecha como prueba técnica para MisterPlan. API REST, vistas renderizadas con Twig e interfaz en JavaScript vanilla que filtra, crea y cancela reservas sin recargar la página. Desplegada en InfinityFree con dominio propio.",
+      en: "Accommodation booking management built in plain PHP, no framework, made as a technical test for MisterPlan. REST API, Twig-rendered views and a vanilla JavaScript interface that filters, creates and cancels bookings without reloading the page. Deployed on InfinityFree with a custom domain.",
+    },
+    images: [
+      "/img/MisterHost/MisterHost_1.png",
+    ],
+    tags: ["PHP", "Twig", "JavaScript", "MySQL", "PHPUnit", "CSS3"],
+    tagIcons: [
+      "fa-brands fa-php",
+      "fa-solid fa-leaf",
+      "fa-brands fa-js",
+      "fa-solid fa-database",
+      "fa-solid fa-vial",
+      "fa-brands fa-css3-alt",
+    ],
+    github: "https://github.com/noemmang/MisterHost.git",
+    live: "https://misterhost.noemmang.com",
+    details: {
+      es: {
+        frontend: "Vistas renderizadas en servidor con Twig 3: plantilla base con herencia (extends y block), autoescape activado y sin ningún |raw. El listado y el detalle (con el historial de eventos en forma de timeline) se pintan en servidor, así que los filtros funcionan también sin JavaScript. Encima, JavaScript vanilla con módulos ES: una única capa de acceso a la API, filtrado sin recargar, creación con validación en el navegador y errores del servidor bajo cada campo, y cancelación de una o varias reservas con confirmación. Estados de carga y avisos de éxito o error siempre visibles. HTML semántico sin lógica ni estilos inline, y CSS con variables y responsive en un fichero aparte.",
+        backend: "API REST en PHP 8.2+ nativo, sin framework, organizada en capas: controladores (API y vistas) que traducen HTTP a llamadas de servicio, servicio con las reglas de negocio (estados y transiciones permitidas), validador y repositorio como único lugar con SQL. Piezas propias de Core: router, request, respuestas JSON, gestor de errores centralizado y traductor, con todos los textos en un fichero de idioma. Seguridad: consultas preparadas con PDO, validación en servidor con listas de valores permitidos, errores internos solo en el log y cabeceras Content-Security-Policy, X-Content-Type-Options y X-Frame-Options. Autoload PSR-4 con Composer y 16 tests con PHPUnit: validador, transiciones del servicio y filtros del repositorio contra la base de datos real, dentro de una transacción que se deshace.",
+        database: "MySQL/MariaDB con PDO. Dos tablas, reserva y reserva_evento, con ENUM de estado, restricciones CHECK en fechas e importe, clave foránea e índices en estado y fechas. Crear una reserva o cambiar su estado y guardar su evento en el historial se hace en una sola transacción, para no dejar historial huérfano. Un único fichero .sql crea las tablas y carga 50 reservas de ejemplo en distintos estados, con su historial. SQL portable entre MySQL y MariaDB.",
+        features: "Listado con filtros combinables por estado, rango de fechas, nombre del huésped y nombre del alojamiento. Detalle de la reserva con su historial de eventos. Creación de reservas con validación en cliente y en servidor. Cancelación desde el listado, de una en una o varias a la vez, con confirmación. Cambio de estado (confirmar o cancelar) con transiciones controladas: una reserva cancelada no cambia más. Respuestas JSON con códigos HTTP coherentes (200, 201, 400, 404, 405, 409, 422 y 500) y errores por campo.",
+        deployment: "Desplegada en InfinityFree, un hosting gratuito con PHP y MySQL, con subdominio propio (misterhost.noemmang.com) y certificado SSL gratuito. Un .htaccess reparte las peticiones a frontend/, la única carpeta pública, y bloquea el acceso a backend/ y database/. Los datos de conexión viven en un .env en el servidor, fuera de Git.",
+      },
+      en: {
+        frontend: "Server-rendered views with Twig 3: a base template with inheritance (extends and block), autoescaping enabled and no |raw anywhere. The list and the detail page (with the event history as a timeline) are rendered on the server, so the filters also work without JavaScript. On top of that, vanilla JavaScript with ES modules: a single API access layer, filtering without reloading, creation with in-browser validation and server errors shown under each field, and cancellation of one or several bookings with confirmation. Loading states and success or error messages always visible. Semantic HTML with no inline logic or styles, and CSS with variables and responsive rules in a separate file.",
+        backend: "REST API in plain PHP 8.2+, no framework, organized in layers: controllers (API and views) that translate HTTP into service calls, a service with the business rules (allowed states and transitions), a validator and a repository as the only place with SQL. Custom Core pieces: router, request, JSON responses, centralized error handler and translator, with all texts kept in a language file. Security: PDO prepared statements, server-side validation against allow-lists, internal errors logged only, and Content-Security-Policy, X-Content-Type-Options and X-Frame-Options headers. PSR-4 autoloading with Composer and 16 PHPUnit tests: validator, service transitions and repository filters against the real database, inside a transaction that is rolled back.",
+        database: "MySQL/MariaDB with PDO. Two tables, reserva and reserva_evento, with a state ENUM, CHECK constraints on dates and amount, a foreign key and indexes on state and dates. Creating a booking or changing its state and saving its event in the history is done in a single transaction, so no orphaned history is left behind. A single .sql file creates the tables and loads 50 sample bookings in different states, with their history. SQL portable between MySQL and MariaDB.",
+        features: "List with combinable filters by state, date range, guest name and accommodation name. Booking detail with its event history. Booking creation with client and server validation. Cancellation from the list, one at a time or several at once, with confirmation. State change (confirm or cancel) with controlled transitions: a cancelled booking can't change again. JSON responses with consistent HTTP status codes (200, 201, 400, 404, 405, 409, 422 and 500) and per-field errors.",
+        deployment: "Deployed on InfinityFree, a free hosting service with PHP and MySQL, with a custom subdomain (misterhost.noemmang.com) and a free SSL certificate. An .htaccess file routes requests to frontend/, the only public folder, and blocks access to backend/ and database/. Connection settings live in an .env file on the server, outside Git.",
+      },
+    },
+  },
 ];
 
 // ─── EMAILJS ──────────────────────────────────────────────────────────────────
