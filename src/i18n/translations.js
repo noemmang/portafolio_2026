@@ -63,20 +63,10 @@ export const translations = {
     },
     projects: {
       title: "Mis Proyectos",
-      technicalDetails: "Detalles técnicos",
+      about: "Sobre el proyecto",
       viewSite: "Ver web",
       imageAlt: "imagen",
       imageAriaLabel: "Imagen",
-      detailLabels: {
-        frontend: "Frontend",
-        backend: "Backend",
-        database: "Base de datos",
-        cloud: "Cloud / DevOps",
-        features: "Funcionalidades",
-        deployment: "Despliegue",
-        contact: "Contacto",
-        visualization: "Visualización",
-      },
     },
     contact: {
       title: "Hablemos",
@@ -166,20 +156,10 @@ export const translations = {
     },
     projects: {
       title: "My Projects",
-      technicalDetails: "Technical details",
+      about: "About the project",
       viewSite: "View site",
       imageAlt: "image",
       imageAriaLabel: "Image",
-      detailLabels: {
-        frontend: "Frontend",
-        backend: "Backend",
-        database: "Database",
-        cloud: "Cloud / DevOps",
-        features: "Features",
-        deployment: "Deployment",
-        contact: "Contact",
-        visualization: "Visualization",
-      },
     },
     contact: {
       title: "Let's talk",

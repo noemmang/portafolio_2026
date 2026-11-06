@@ -149,20 +149,19 @@ export const skillNodes = [
 ];
 
 // ─── PROJECTS ─────────────────────────────────────────────────────────────────
-// `details` usa claves semánticas fijas (frontend, backend, database, features,
-// deployment, contact, visualization); las etiquetas visibles se traducen en
-// src/i18n/translations.js → projects.detailLabels
+// `description`: texto breve de la tarjeta (qué es la app, sin tecnologías ni funcionalidades).
+// `readme`: contenido del botón de información, con estructura de README. Cada sección admite
+// `paragraphs`, `bullets`, `code` (bloque de código) y `table` ({ head, rows }). Los textos
+// admiten **negrita** y `código` en línea. Los títulos de sección se traducen a mano en es/en.
 export const projects = [
   {
     id: 1,
     title: "InmoDomain",
     description: {
-      es: "Plataforma de análisis del mercado inmobiliario español con datos oficiales del INE y el MIVAU. Arquitectura de microservicios en .NET 10 con API Gateway (YARP), eventos asíncronos con Azure Service Bus y frontend en React. Permite explorar y comparar provincias, calcula un Property Score propio y gestiona favoritos y alertas. Desplegada en Azure con CI/CD y dominio propio.",
-      en: "Spanish real estate market analysis platform built on official INE and MIVAU data. Microservices architecture in .NET 10 with an API Gateway (YARP), asynchronous events through Azure Service Bus and a React frontend. It lets users explore and compare provinces, computes its own Property Score and manages favorites and alerts. Deployed on Azure with CI/CD and a custom domain.",
+      es: "Plataforma para explorar y comparar el mercado inmobiliario español por provincias, con datos oficiales y un índice propio.",
+      en: "Platform to explore and compare the Spanish real estate market by province, with official data and its own index.",
     },
-    images: [
-      "/img/InmoDomain/InmoDomain_1.png",
-    ],
+    images: ["/img/InmoDomain/InmoDomain_1.png"],
     tags: [".NET", "React", "TypeScript", "PostgreSQL", "YARP", "Service Bus", "Azure", "Docker", "GitHub Actions"],
     tagIcons: [
       "fa-solid fa-code",
@@ -177,33 +176,165 @@ export const projects = [
     ],
     github: "https://github.com/noemmang/InmoDomain",
     live: "https://inmodomain.noemmang.com",
-    details: {
-      es: {
-        frontend: "SPA en React 19 con TypeScript y Vite, con react-router para la navegación (rutas públicas y rutas protegidas con sesión) y Recharts para los gráficos: evolución de precios, ranking, comparador entre provincias y mapa de calor de actividad. Sin librería de estado ni de peticiones: contextos de React (sesión, favoritos y notificaciones) y un cliente fetch propio con el access token en memoria, refresh token en localStorage y renovación compartida entre peticiones simultáneas con reintento tras un 401. Mapa interactivo de España, foto de perfil recortada y reducida en el navegador, estados de carga que avisan del arranque en frío, diseño responsive en modo oscuro y animaciones que respetan prefers-reduced-motion.",
-        backend: "Siete servicios en .NET 10 y ASP.NET Core: Gateway (YARP), Identity, Property, MarketData, Analytics, Alerts y Notifications, cada uno con su responsabilidad y su base de datos lógica. Cada servicio sigue el patrón Controller → Service → Repository con DTOs en el límite HTTP y un tipo Result para los fallos de negocio. El Gateway es el único punto de entrada: valida el JWT, aplica rate limiting por IP y CORS, y no expone los servicios internos. Identity emite JWT firmados con RS256 (solo guarda la clave privada), refresh tokens con rotación en cada uso y recuperación de contraseña por email con Resend. MarketData importa los datos oficiales del INE (API JSON, tabla 6150) y del MIVAU (ficheros XLS leídos con ExcelDataReader) mediante un job de importación idempotente.",
-        database: "PostgreSQL alojado en Neon, con un único proyecto y una base de datos lógica por servicio, sin tablas compartidas. Acceso con Entity Framework Core y claves primarias Guid, usando el código oficial del INE como referencia natural de provincia entre servicios. Cadenas de conexión separadas: pooled para la aplicación y directa para las migraciones. Analytics guarda un histórico trimestral de índices por provincia (precio, actividad y tendencia, en variantes de percentil histórico y ranking nacional) a partir de los cuales calcula el Property Score.",
-        cloud: "Arquitectura orientada a eventos con Azure Service Bus (colas en nivel Basic): la importación de datos dispara el recálculo de índices en Analytics, que a su vez dispara la evaluación de alertas y la creación de notificaciones. Cada servicio va en su propia imagen Docker, publicada en GitHub Container Registry, y se despliega en Azure Container Apps con escala a cero y reglas KEDA que despiertan los consumidores al llegar un mensaje. Un Container Apps Job programado ejecuta la importación a diario. CI/CD con GitHub Actions: build, publicación de imágenes y despliegue autenticado con OIDC, sin secretos de larga duración. El frontend se publica en Azure Static Web Apps con dominio propio gestionado en Cloudflare. Presupuesto mensual limitado con alertas de coste, y entorno local completo con Docker Compose y el emulador de Service Bus.",
-        features: "Exploración del mercado inmobiliario por provincia con precio medio por metro cuadrado y volumen de compraventas. Comparador de provincias. Property Score propio, con alternancia entre percentil histórico y ranking nacional, y tendencia trimestral o interanual. Favoritos, alertas personalizadas sobre el score, los índices o el precio por metro cuadrado (se disparan una vez por periodo de dato) y panel de notificaciones con contador de no leídas. Registro, inicio de sesión, recuperación de contraseña y perfil con foto.",
-      },
-      en: {
-        frontend: "SPA built with React 19, TypeScript and Vite, using react-router for navigation (public routes and session-protected routes) and Recharts for the charts: price evolution, ranking, a province comparison and an activity heatmap. No state or data-fetching library: React contexts (session, favorites and notifications) and a custom fetch client with the access token kept in memory, the refresh token in localStorage and a single shared refresh across concurrent requests with a retry after a 401. Interactive map of Spain, profile photo cropped and downsized in the browser, loading states that warn about cold starts, a responsive dark-mode design and animations that respect prefers-reduced-motion.",
-        backend: "Seven services in .NET 10 and ASP.NET Core: Gateway (YARP), Identity, Property, MarketData, Analytics, Alerts and Notifications, each with its own responsibility and its own logical database. Every service follows the Controller → Service → Repository pattern with DTOs at the HTTP boundary and a Result type for business failures. The Gateway is the single entry point: it validates the JWT, applies per-IP rate limiting and CORS, and does not expose internal services. Identity issues JWTs signed with RS256 (it alone holds the private key), refresh tokens rotated on every use and email-based password recovery through Resend. MarketData imports official data from the INE (JSON API, table 6150) and the MIVAU (XLS files read with ExcelDataReader) through an idempotent import job.",
-        database: "PostgreSQL hosted on Neon, with a single project and one logical database per service, with no shared tables. Access through Entity Framework Core and Guid primary keys, using the official INE code as the natural province reference across services. Separate connection strings: pooled for the application and direct for migrations. Analytics stores a quarterly history of indexes per province (price, activity and trend, in historical-percentile and national-ranking variants) from which it computes the Property Score.",
-        cloud: "Event-driven architecture on Azure Service Bus (Basic-tier queues): the data import triggers the index recalculation in Analytics, which in turn triggers alert evaluation and notification creation. Each service ships in its own Docker image, published to GitHub Container Registry, and runs on Azure Container Apps with scale-to-zero and KEDA rules that wake up the consumers when a message arrives. A scheduled Container Apps Job runs the import daily. CI/CD with GitHub Actions: build, image publishing and deployment authenticated through OIDC, with no long-lived secrets. The frontend is published on Azure Static Web Apps with a custom domain managed on Cloudflare. A capped monthly budget with cost alerts, and a full local environment with Docker Compose and the Service Bus emulator.",
-        features: "Real estate market exploration by province with average price per square meter and sales volume. Province comparison. Own Property Score, switchable between historical percentile and national ranking, with quarterly or year-over-year trend. Favorites, custom alerts on the score, the indexes or the price per square meter (fired once per data period) and a notification panel with an unread counter. Sign-up, sign-in, password recovery and a profile with a photo.",
-      },
+    readme: {
+      es: [
+        {
+          title: "¿Qué es?",
+          paragraphs: [
+            "Plataforma para explorar, analizar y comparar el mercado inmobiliario en España con datos de fuentes oficiales: el **INE** (tabla 6150), el **MIVAU** y el **ISTAC**.",
+            "A partir de un histórico trimestral de índices por provincia calcula un **Property Score** propio, y permite guardar favoritos y crear alertas personalizadas.",
+          ],
+        },
+        {
+          title: "Objetivo",
+          paragraphs: ["Proyecto pensado para aprender construyendo. Esto es lo que buscaba aprender:"],
+          bullets: [
+            "**Microservicios**: dividir un sistema en servicios independientes, cada uno con su responsabilidad y su base de datos, detrás de un API Gateway.",
+            "**Ecosistema .NET**: ASP.NET Core, Entity Framework Core y una arquitectura en capas.",
+            "**Asincronía y eventos**: comunicar los servicios con colas de mensajes en lugar de llamadas directas.",
+            "**APIs externas**: integrar datos oficiales del INE, el MIVAU y el ISTAC, en JSON y en Excel.",
+            "**Despliegue automatizado en Azure**: infraestructura y configuración definidas con scripts y plantillas, sin configurar nada a mano, y CI/CD con GitHub Actions.",
+          ],
+        },
+        {
+          title: "Qué se puede hacer",
+          bullets: [
+            "**Explorar** el precio medio por m² y el volumen de compraventas de cada provincia, con una línea temporal para ver cómo cambian los datos.",
+            "**Comparar** provincias lado a lado, también en el histórico.",
+            "Consultar el **Property Score**, alternando entre percentil histórico y ranking nacional, con tendencia trimestral o interanual.",
+            "Guardar **favoritos** y crear **alertas** sobre el score, los índices o el precio por m². Se disparan una vez por periodo de dato.",
+            "Recibir **notificaciones** en la web, con contador de no leídas.",
+            "Registro, inicio de sesión, recuperación de contraseña y perfil con foto.",
+          ],
+        },
+        {
+          title: "Arquitectura",
+          paragraphs: [
+            "Microservicios con un **API Gateway** como único punto de entrada. Cada servicio tiene su responsabilidad y su propia base de datos lógica, sin tablas compartidas.",
+          ],
+          code: "Cliente (React)\n      │\n      ▼\nGateway (YARP)\n      │\n ┌────┼─────────┬───────────┬─────────┐\n ▼    ▼         ▼           ▼         ▼\nIdentity Property MarketData Analytics Alerts\n                                │         │\n                                └────┬────┘\n                                     ▼\n                               Notifications",
+          bullets: [
+            "**Gateway**: valida el JWT, aplica rate limiting por IP y CORS, y no expone los servicios internos.",
+            "**Identity**: JWT firmados con RS256, refresh tokens con rotación y recuperación de contraseña por email.",
+            "**Property**: provincias y favoritos.",
+            "**MarketData**: importa los datos oficiales con un job idempotente.",
+            "**Analytics**: calcula los índices, las tendencias y el Property Score.",
+            "**Alerts** y **Notifications**: reglas de los usuarios y avisos asociados.",
+          ],
+        },
+        {
+          title: "Flujo de eventos",
+          paragraphs: ["La importación de datos dispara una cadena de eventos asíncronos con **Azure Service Bus**:"],
+          bullets: [
+            "MarketData importa los datos del INE y el MIVAU.",
+            "Analytics recalcula los índices y el Property Score.",
+            "Alerts evalúa las reglas de los usuarios.",
+            "Notifications crea los avisos.",
+          ],
+        },
+        {
+          title: "Stack",
+          bullets: [
+            "**Frontend**: React 19, TypeScript, Vite y Recharts. Sin librería de estado: contextos de React y un cliente fetch propio con renovación de sesión compartida.",
+            "**Backend**: .NET 10 y ASP.NET Core, con patrón Controller → Service → Repository.",
+            "**Datos**: PostgreSQL en Neon con Entity Framework Core.",
+            "**Cloud**: Azure Container Apps, Service Bus y Static Web Apps, con dominio propio en Cloudflare.",
+          ],
+        },
+        {
+          title: "Despliegue y CI/CD",
+          bullets: [
+            "Cada servicio en su propia imagen **Docker**, publicada en GitHub Container Registry.",
+            "Despliegue en **Azure Container Apps** con escala a cero y un job diario para la importación.",
+            "**GitHub Actions**: build, publicación de imágenes y despliegue autenticado con OIDC, sin secretos de larga duración.",
+            "Entorno local completo con Docker Compose y el emulador de Service Bus.",
+          ],
+        },
+      ],
+      en: [
+        {
+          title: "What is it?",
+          paragraphs: [
+            "A platform to explore, analyze and compare the Spanish real estate market using official sources: the **INE** (table 6150), the **MIVAU** and the **ISTAC**.",
+            "From a quarterly history of indexes per province it computes its own **Property Score**, and lets users save favorites and create custom alerts.",
+          ],
+        },
+        {
+          title: "Goal",
+          paragraphs: ["A project designed to learn by building. This is what I wanted to learn:"],
+          bullets: [
+            "**Microservices**: splitting a system into independent services, each with its own responsibility and database, behind an API Gateway.",
+            "**.NET ecosystem**: ASP.NET Core, Entity Framework Core and a layered architecture.",
+            "**Asynchronous communication and events**: connecting services through message queues instead of direct calls.",
+            "**External APIs**: integrating official INE, MIVAU and ISTAC data, in JSON and Excel.",
+            "**Automated deployment on Azure**: infrastructure and configuration defined with scripts and templates, nothing set up by hand, and CI/CD with GitHub Actions.",
+          ],
+        },
+        {
+          title: "What you can do",
+          bullets: [
+            "**Explore** the average price per m² and the sales volume of each province, with a timeline to see how the data changes.",
+            "**Compare** provinces side by side, historical data included.",
+            "Check the **Property Score**, switchable between historical percentile and national ranking, with quarterly or year-over-year trend.",
+            "Save **favorites** and create **alerts** on the score, the indexes or the price per m². They fire once per data period.",
+            "Get in-app **notifications** with an unread counter.",
+            "Sign-up, sign-in, password recovery and a profile with a photo.",
+          ],
+        },
+        {
+          title: "Architecture",
+          paragraphs: [
+            "Microservices with an **API Gateway** as the single entry point. Each service has its own responsibility and its own logical database, with no shared tables.",
+          ],
+          code: "Client (React)\n      │\n      ▼\nGateway (YARP)\n      │\n ┌────┼─────────┬───────────┬─────────┐\n ▼    ▼         ▼           ▼         ▼\nIdentity Property MarketData Analytics Alerts\n                                │         │\n                                └────┬────┘\n                                     ▼\n                               Notifications",
+          bullets: [
+            "**Gateway**: validates the JWT, applies per-IP rate limiting and CORS, and does not expose internal services.",
+            "**Identity**: JWTs signed with RS256, rotating refresh tokens and email-based password recovery.",
+            "**Property**: provinces and favorites.",
+            "**MarketData**: imports the official data with an idempotent job.",
+            "**Analytics**: computes the indexes, the trends and the Property Score.",
+            "**Alerts** and **Notifications**: user rules and the notices they produce.",
+          ],
+        },
+        {
+          title: "Event flow",
+          paragraphs: ["The data import triggers a chain of asynchronous events through **Azure Service Bus**:"],
+          bullets: [
+            "MarketData imports the INE and MIVAU data.",
+            "Analytics recalculates the indexes and the Property Score.",
+            "Alerts evaluates the users' rules.",
+            "Notifications creates the notices.",
+          ],
+        },
+        {
+          title: "Stack",
+          bullets: [
+            "**Frontend**: React 19, TypeScript, Vite and Recharts. No state library: React contexts and a custom fetch client with a shared session refresh.",
+            "**Backend**: .NET 10 and ASP.NET Core, with a Controller → Service → Repository pattern.",
+            "**Data**: PostgreSQL on Neon with Entity Framework Core.",
+            "**Cloud**: Azure Container Apps, Service Bus and Static Web Apps, with a custom domain on Cloudflare.",
+          ],
+        },
+        {
+          title: "Deployment and CI/CD",
+          bullets: [
+            "Each service in its own **Docker** image, published to GitHub Container Registry.",
+            "Deployed on **Azure Container Apps** with scale-to-zero and a daily job for the import.",
+            "**GitHub Actions**: build, image publishing and deployment authenticated through OIDC, with no long-lived secrets.",
+            "Full local environment with Docker Compose and the Service Bus emulator.",
+          ],
+        },
+      ],
     },
   },
   {
     id: 2,
     title: "MasterBuild",
     description: {
-      es: "Comparador de precios de componentes de PC en España, con doble enfoque full stack (Angular + Laravel) y cloud/DevOps: scraping real, alertas por email y en la web, configurador con compatibilidad y visor 3D. Desplegado en Azure con dominio propio en Cloudflare.",
-      en: "PC component price comparison tool for Spain, blending full stack (Angular + Laravel) and cloud/DevOps: real scraping, email and in-app alerts, a compatibility-aware configurator and a 3D viewer. Deployed on Azure with a custom domain on Cloudflare.",
+      es: "Compara precios de componentes de PC en las tiendas españolas y monta tu equipo sabiendo que todo es compatible.",
+      en: "Compare PC component prices across Spanish stores and build your rig knowing every part is compatible.",
     },
-    images: [
-      "/img/MasterBuild/MasterBuild_1.png",
-    ],
+    images: ["/img/MasterBuild/MasterBuild_1.png"],
     tags: ["Angular", "Laravel", "TypeScript", "PostgreSQL", "Azure", "Docker", "Cloudflare", "Three.js", "ApexCharts"],
     tagIcons: [
       "fa-brands fa-angular",
@@ -218,33 +349,131 @@ export const projects = [
     ],
     github: "https://github.com/noemmang/masterBuuild.git",
     live: "https://masterbuild.noemmang.com",
-    details: {
-      es: {
-        frontend: "SPA en Angular 21 con arquitectura standalone components y Signals para el estado reactivo (por ejemplo, el contador de notificaciones no leídas). Organización por features (buscador, configurador, comparador de specs, visor de gabinetes, guardados, perfil, auth), cada una con sus propios componentes, servicios y modelos TypeScript. Servicios con HttpClient e interceptores para consumir la API REST. Modo claro/oscuro con variables CSS y persistencia en localStorage.",
-        backend: "API REST en Laravel 13 (PHP 8.4) sobre FrankenPHP, empaquetada en Docker. Estructura MVC completa: controladores por recurso, modelos Eloquent con relaciones, migraciones y seeders. Autenticación con Laravel Sanctum. Los scrapers de cada tienda (Coolmod, Neobyte…) implementan una interfaz común y extraen los datos JSON-LD (schema.org/Product) directamente de la ficha de producto real.",
-        database: "PostgreSQL alojado en Neon (serverless). Esquema relacional con componentes, tiendas, precios actuales e históricos, usuarios, configuraciones guardadas y alertas de precio. El historial permite consultar hasta 3 años de precios por componente y tienda.",
-        cloud: "Infraestructura 100% en Azure: frontend en Static Web Apps, backend y scraping en Container Apps. Un Container Apps Job programado (cron diario) ejecuta el scraping real y, justo después, revisa las alertas de precio pendientes. CI/CD con GitHub Actions: un workflow construye y publica el frontend en cada push a main, y otro construye la imagen Docker del backend, la sube a Azure Container Registry y actualiza tanto la Container App como el Job con el nuevo tag. Dominio propio (masterbuild.noemmang.com) gestionado en Cloudflare.",
-        features: "Buscador filtrado por tipo de componente con precios reales de varias tiendas (scraping real, ya no datos ficticios). Configurador con filtrado por compatibilidad y dimensiones. Historial de precios con gráficas ApexCharts (línea media + rango min-máx, anotaciones de mínimo y máximo histórico). Visor 3D de dimensiones de PC con Three.js. Comparador de especificaciones técnicas. Alertas de bajada de precio con aviso por email y en la web (panel de notificaciones con contador en tiempo real). Guardado de componentes y configuraciones completas.",
-      },
-      en: {
-        frontend: "SPA in Angular 21 with a standalone components architecture and Signals for reactive state (e.g. the unread-notifications counter). Organized by feature (search, configurator, spec comparator, case viewer, saved items, profile, auth), each with its own components, services and TypeScript models. Services use HttpClient and interceptors to consume the REST API. Light/dark mode with CSS variables and localStorage persistence.",
-        backend: "REST API in Laravel 13 (PHP 8.4) on FrankenPHP, packaged in Docker. Full MVC structure: resource controllers, Eloquent models with relationships, migrations and seeders. Authentication with Laravel Sanctum. Each store's scraper (Coolmod, Neobyte…) implements a common interface and extracts JSON-LD (schema.org/Product) data straight from the real product page.",
-        database: "PostgreSQL hosted on Neon (serverless). Relational schema with components, stores, current and historical prices, users, saved configurations and price alerts. The history allows querying up to 3 years of prices per component and store.",
-        cloud: "Infrastructure fully on Azure: frontend on Static Web Apps, backend and scraping on Container Apps. A scheduled Container Apps Job (daily cron) runs the real scraping and, right after, checks pending price alerts. CI/CD with GitHub Actions: one workflow builds and publishes the frontend on every push to main, and another builds the backend's Docker image, pushes it to Azure Container Registry and updates both the Container App and the Job with the new tag. Custom domain (masterbuild.noemmang.com) managed on Cloudflare.",
-        features: "Search engine filtered by component type with real prices from several stores (real scraping, no more mock data). Configurator with compatibility and dimension filtering. Price history with ApexCharts graphs (average line + min-max range, historical min/max annotations). 3D PC-dimension viewer built with Three.js. Technical spec comparator. Price-drop alerts sent by email and in-app (a notification panel with a live counter). Saving of components and full configurations.",
-      },
+    readme: {
+      es: [
+        {
+          title: "¿Qué es?",
+          paragraphs: [
+            "Comparador de precios de componentes de PC, enfocado exclusivamente en hardware. Permite buscar componentes, comparar precios entre tiendas y acceder directamente a ellas para comprar.",
+            "Desarrollado como **Trabajo de Fin de Grado** del ciclo de Desarrollo de Aplicaciones Web, con el objetivo de ayudar a montar un PC de forma informada.",
+          ],
+        },
+        {
+          title: "Objetivo",
+          paragraphs: ["Mi proyecto más antiguo y el primero con cloud. Esto es lo que buscaba aprender:"],
+          bullets: [
+            "**Scraping**: obtener precios reales de las tiendas en lugar de usar datos de ejemplo.",
+            "**Dos lenguajes en un mismo proyecto**: PHP en el backend y TypeScript en el frontend, comunicados por una API REST.",
+            "**MVC**: llevar la arquitectura de Laravel (modelos, controladores y servicios) a un proyecto completo.",
+            "**Azure**: publicar frontend, backend y tareas programadas en la nube.",
+            "**Workflows con GitHub Actions**: automatizar la construcción y el despliegue en cada cambio.",
+          ],
+        },
+        {
+          title: "Qué se puede hacer",
+          bullets: [
+            "**Buscar** componentes por tipo con precios reales de varias tiendas.",
+            "**Configurar** un PC con filtrado por compatibilidad y dimensiones.",
+            "Ver el **historial de precios** con gráficas: media, rango mínimo-máximo y anotaciones del mínimo y máximo histórico.",
+            "Recibir **recomendaciones** de configuración según el perfil de uso: gaming, edición de vídeo, renderizado u oficina.",
+            "**Comparar** especificaciones técnicas entre componentes.",
+            "Visualizar en **3D** las dimensiones de los gabinetes.",
+            "Crear **alertas** de bajada de precio, con aviso por email y en la web.",
+            "**Guardar** componentes y configuraciones completas.",
+          ],
+        },
+        {
+          title: "Precios reales",
+          paragraphs: [
+            "Los datos no son ficticios: un scraper por tienda (hoy Coolmod y Neobyte) lee los datos estructurados `JSON-LD` de la ficha de producto real. Todos los scrapers implementan una interfaz común.",
+            "Un job programado ejecuta el scraping cada día y, justo después, revisa las alertas de precio pendientes. El historial guarda hasta 3 años de precios por componente y tienda.",
+          ],
+        },
+        {
+          title: "Stack",
+          bullets: [
+            "**Frontend**: Angular 21 con componentes standalone y Signals, organizado por features, con modo claro/oscuro.",
+            "**Backend**: API REST en Laravel 13 (PHP 8.4) sobre FrankenPHP, con autenticación Sanctum.",
+            "**Datos**: PostgreSQL en Neon.",
+            "**Visualización**: ApexCharts para los precios y Three.js para el visor 3D.",
+          ],
+        },
+        {
+          title: "Despliegue y CI/CD",
+          bullets: [
+            "Infraestructura en **Azure**: frontend en Static Web Apps y backend en Container Apps.",
+            "**GitHub Actions**: un workflow publica el frontend en cada push a `main` y otro construye la imagen Docker del backend y actualiza la app y el job.",
+            "Dominio propio gestionado en **Cloudflare**.",
+          ],
+        },
+      ],
+      en: [
+        {
+          title: "What is it?",
+          paragraphs: [
+            "A PC component price comparison tool focused exclusively on hardware. Users can search for components, compare prices across stores and go straight to them to buy.",
+            "Built as the **final degree project** of the Web Application Development program, with the goal of helping people build a PC in an informed way.",
+          ],
+        },
+        {
+          title: "Goal",
+          paragraphs: ["My oldest project and my first one with cloud. This is what I wanted to learn:"],
+          bullets: [
+            "**Scraping**: getting real prices from stores instead of using sample data.",
+            "**Two languages in one project**: PHP on the backend and TypeScript on the frontend, connected by a REST API.",
+            "**MVC**: applying Laravel's architecture (models, controllers and services) to a complete project.",
+            "**Azure**: publishing the frontend, the backend and scheduled tasks in the cloud.",
+            "**GitHub Actions workflows**: automating the build and deployment on every change.",
+          ],
+        },
+        {
+          title: "What you can do",
+          bullets: [
+            "**Search** components by type with real prices from several stores.",
+            "**Configure** a PC with compatibility and dimension filtering.",
+            "See the **price history** in charts: average, min-max range and annotations for the historical minimum and maximum.",
+            "Get **recommended builds** by usage profile: gaming, video editing, rendering or office.",
+            "**Compare** technical specs between components.",
+            "View case dimensions in **3D**.",
+            "Create price-drop **alerts**, notified by email and in-app.",
+            "**Save** components and full configurations.",
+          ],
+        },
+        {
+          title: "Real prices",
+          paragraphs: [
+            "The data is not mocked: one scraper per store (currently Coolmod and Neobyte) reads the structured `JSON-LD` data from the real product page. All scrapers implement a common interface.",
+            "A scheduled job runs the scraping every day and, right after, checks pending price alerts. The history keeps up to 3 years of prices per component and store.",
+          ],
+        },
+        {
+          title: "Stack",
+          bullets: [
+            "**Frontend**: Angular 21 with standalone components and Signals, organized by feature, with light/dark mode.",
+            "**Backend**: REST API in Laravel 13 (PHP 8.4) on FrankenPHP, with Sanctum authentication.",
+            "**Data**: PostgreSQL on Neon.",
+            "**Visualization**: ApexCharts for prices and Three.js for the 3D viewer.",
+          ],
+        },
+        {
+          title: "Deployment and CI/CD",
+          bullets: [
+            "Infrastructure on **Azure**: frontend on Static Web Apps and backend on Container Apps.",
+            "**GitHub Actions**: one workflow publishes the frontend on every push to `main` and another builds the backend Docker image and updates the app and the job.",
+            "Custom domain managed on **Cloudflare**.",
+          ],
+        },
+      ],
     },
   },
   {
     id: 3,
     title: "MisterHost",
     description: {
-      es: "Gestión de reservas de alojamiento en PHP nativo, sin framework, hecha como prueba técnica para MisterPlan. API REST, vistas renderizadas con Twig e interfaz en JavaScript vanilla que filtra, crea y cancela reservas sin recargar la página. Desplegada en InfinityFree con dominio propio.",
-      en: "Accommodation booking management built in plain PHP, no framework, made as a technical test for MisterPlan. REST API, Twig-rendered views and a vanilla JavaScript interface that filters, creates and cancels bookings without reloading the page. Deployed on InfinityFree with a custom domain.",
+      es: "Aplicación para gestionar reservas de alojamiento: consulta, filtra, crea y cancela reservas de forma clara y rápida.",
+      en: "Application to manage accommodation bookings: view, filter, create and cancel bookings quickly and clearly.",
     },
-    images: [
-      "/img/MisterHost/MisterHost_1.png",
-    ],
+    images: ["/img/MisterHost/MisterHost_1.png"],
     tags: ["PHP", "Twig", "JavaScript", "MySQL", "PHPUnit", "CSS3"],
     tagIcons: [
       "fa-brands fa-php",
@@ -256,33 +485,171 @@ export const projects = [
     ],
     github: "https://github.com/noemmang/MisterHost.git",
     live: "https://misterhost.noemmang.com",
-    details: {
-      es: {
-        frontend: "Vistas renderizadas en servidor con Twig 3: plantilla base con herencia (extends y block), autoescape activado y sin ningún |raw. El listado y el detalle (con el historial de eventos en forma de timeline) se pintan en servidor, así que los filtros funcionan también sin JavaScript. Encima, JavaScript vanilla con módulos ES: una única capa de acceso a la API, filtrado sin recargar, creación con validación en el navegador y errores del servidor bajo cada campo, y cancelación de una o varias reservas con confirmación. Estados de carga y avisos de éxito o error siempre visibles. HTML semántico sin lógica ni estilos inline, y CSS con variables y responsive en un fichero aparte.",
-        backend: "API REST en PHP 8.2+ nativo, sin framework, organizada en capas: controladores (API y vistas) que traducen HTTP a llamadas de servicio, servicio con las reglas de negocio (estados y transiciones permitidas), validador y repositorio como único lugar con SQL. Piezas propias de Core: router, request, respuestas JSON, gestor de errores centralizado y traductor, con todos los textos en un fichero de idioma. Seguridad: consultas preparadas con PDO, validación en servidor con listas de valores permitidos, errores internos solo en el log y cabeceras Content-Security-Policy, X-Content-Type-Options y X-Frame-Options. Autoload PSR-4 con Composer y 16 tests con PHPUnit: validador, transiciones del servicio y filtros del repositorio contra la base de datos real, dentro de una transacción que se deshace.",
-        database: "MySQL/MariaDB con PDO. Dos tablas, reserva y reserva_evento, con ENUM de estado, restricciones CHECK en fechas e importe, clave foránea e índices en estado y fechas. Crear una reserva o cambiar su estado y guardar su evento en el historial se hace en una sola transacción, para no dejar historial huérfano. Un único fichero .sql crea las tablas y carga 50 reservas de ejemplo en distintos estados, con su historial. SQL portable entre MySQL y MariaDB.",
-        features: "Listado con filtros combinables por estado, rango de fechas, nombre del huésped y nombre del alojamiento. Detalle de la reserva con su historial de eventos. Creación de reservas con validación en cliente y en servidor. Cancelación desde el listado, de una en una o varias a la vez, con confirmación. Cambio de estado (confirmar o cancelar) con transiciones controladas: una reserva cancelada no cambia más. Respuestas JSON con códigos HTTP coherentes (200, 201, 400, 404, 405, 409, 422 y 500) y errores por campo.",
-        deployment: "Desplegada en InfinityFree, un hosting gratuito con PHP y MySQL, con subdominio propio (misterhost.noemmang.com) y certificado SSL gratuito. Un .htaccess reparte las peticiones a frontend/, la única carpeta pública, y bloquea el acceso a backend/ y database/. Los datos de conexión viven en un .env en el servidor, fuera de Git.",
-      },
-      en: {
-        frontend: "Server-rendered views with Twig 3: a base template with inheritance (extends and block), autoescaping enabled and no |raw anywhere. The list and the detail page (with the event history as a timeline) are rendered on the server, so the filters also work without JavaScript. On top of that, vanilla JavaScript with ES modules: a single API access layer, filtering without reloading, creation with in-browser validation and server errors shown under each field, and cancellation of one or several bookings with confirmation. Loading states and success or error messages always visible. Semantic HTML with no inline logic or styles, and CSS with variables and responsive rules in a separate file.",
-        backend: "REST API in plain PHP 8.2+, no framework, organized in layers: controllers (API and views) that translate HTTP into service calls, a service with the business rules (allowed states and transitions), a validator and a repository as the only place with SQL. Custom Core pieces: router, request, JSON responses, centralized error handler and translator, with all texts kept in a language file. Security: PDO prepared statements, server-side validation against allow-lists, internal errors logged only, and Content-Security-Policy, X-Content-Type-Options and X-Frame-Options headers. PSR-4 autoloading with Composer and 16 PHPUnit tests: validator, service transitions and repository filters against the real database, inside a transaction that is rolled back.",
-        database: "MySQL/MariaDB with PDO. Two tables, reserva and reserva_evento, with a state ENUM, CHECK constraints on dates and amount, a foreign key and indexes on state and dates. Creating a booking or changing its state and saving its event in the history is done in a single transaction, so no orphaned history is left behind. A single .sql file creates the tables and loads 50 sample bookings in different states, with their history. SQL portable between MySQL and MariaDB.",
-        features: "List with combinable filters by state, date range, guest name and accommodation name. Booking detail with its event history. Booking creation with client and server validation. Cancellation from the list, one at a time or several at once, with confirmation. State change (confirm or cancel) with controlled transitions: a cancelled booking can't change again. JSON responses with consistent HTTP status codes (200, 201, 400, 404, 405, 409, 422 and 500) and per-field errors.",
-        deployment: "Deployed on InfinityFree, a free hosting service with PHP and MySQL, with a custom subdomain (misterhost.noemmang.com) and a free SSL certificate. An .htaccess file routes requests to frontend/, the only public folder, and blocks access to backend/ and database/. Connection settings live in an .env file on the server, outside Git.",
-      },
+    readme: {
+      es: [
+        {
+          title: "¿Qué es?",
+          paragraphs: [
+            "Aplicación de gestión de reservas de alojamiento desarrollada en PHP nativo, sin framework, con una API REST y vistas renderizadas en servidor.",
+          ],
+        },
+        {
+          title: "Objetivo",
+          paragraphs: ["Un proyecto pequeño para afianzar los fundamentos. Esto es lo que buscaba practicar:"],
+          bullets: [
+            "**CRUD**: crear, consultar y cancelar datos a través de una API REST.",
+            "**PHP sin framework**: entender qué resuelve un framework construyendo a mano el router, las respuestas y la gestión de errores.",
+            "**Tests**: probar la lógica de negocio y las consultas con PHPUnit.",
+          ],
+        },
+        {
+          title: "Qué se puede hacer",
+          bullets: [
+            "**Listar** reservas con filtros combinables por estado, rango de fechas, nombre del huésped y nombre del alojamiento.",
+            "Ver el **detalle** de una reserva con su historial de eventos en forma de timeline.",
+            "**Crear** reservas con validación en el navegador y en el servidor.",
+            "**Cancelar** reservas desde el listado, de una en una o varias a la vez, con confirmación.",
+            "**Confirmar o cancelar** con transiciones controladas: una reserva cancelada no cambia más.",
+          ],
+        },
+        {
+          title: "Arquitectura",
+          paragraphs: [
+            "Backend en capas, con las piezas del núcleo hechas a mano: router, request, respuestas JSON, gestor de errores y traductor.",
+          ],
+          bullets: [
+            "**Controladores**: traducen HTTP a llamadas de servicio.",
+            "**Servicio**: reglas de negocio, con los estados y transiciones permitidos.",
+            "**Validador**: validación en servidor con listas de valores permitidos.",
+            "**Repositorio**: el único lugar con SQL.",
+          ],
+        },
+        {
+          title: "Rutas de la API",
+          table: {
+            head: ["Método", "Ruta", "Descripción"],
+            rows: [
+              ["GET", "`/api/reservas`", "Listado con filtros combinables"],
+              ["GET", "`/api/reservas/{id}`", "Detalle con su historial de eventos"],
+              ["POST", "`/api/reservas`", "Crea una reserva en estado pendiente"],
+              ["PATCH", "`/api/reservas/{id}/estado`", "Confirma o cancela una reserva"],
+            ],
+          },
+          paragraphs: ["Las respuestas son JSON con códigos HTTP coherentes (200, 201, 400, 404, 405, 409, 422 y 500) y errores por campo."],
+        },
+        {
+          title: "Seguridad y calidad",
+          bullets: [
+            "Consultas preparadas con **PDO** y validación en servidor.",
+            "Plantillas **Twig** con autoescape y sin ningún `|raw`.",
+            "Cabeceras `Content-Security-Policy`, `X-Content-Type-Options` y `X-Frame-Options`.",
+            "**16 tests con PHPUnit** contra la base de datos real, dentro de una transacción que se deshace.",
+          ],
+        },
+        {
+          title: "Stack",
+          bullets: [
+            "**Frontend**: vistas con Twig 3 y JavaScript vanilla con módulos ES. Los filtros funcionan también sin JavaScript.",
+            "**Backend**: PHP 8.2+ con autoload PSR-4 y Composer.",
+            "**Datos**: MySQL/MariaDB con dos tablas, restricciones CHECK y una transacción para guardar la reserva y su evento. Incluye 50 reservas de ejemplo.",
+          ],
+        },
+        {
+          title: "Despliegue",
+          bullets: [
+            "Publicada en **InfinityFree**, un hosting gratuito con PHP y MySQL, con subdominio propio y certificado SSL.",
+            "Un `.htaccess` expone solo `frontend/` y bloquea `backend/` y `database/`.",
+            "Los datos de conexión viven en un `.env` en el servidor, fuera de Git.",
+          ],
+        },
+      ],
+      en: [
+        {
+          title: "What is it?",
+          paragraphs: [
+            "An accommodation booking management app written in plain PHP, no framework, with a REST API and server-rendered views.",
+          ],
+        },
+        {
+          title: "Goal",
+          paragraphs: ["A small project to strengthen the fundamentals. This is what I wanted to practice:"],
+          bullets: [
+            "**CRUD**: creating, reading and cancelling data through a REST API.",
+            "**Plain PHP**: understanding what a framework solves by building the router, the responses and the error handling by hand.",
+            "**Tests**: testing the business logic and the queries with PHPUnit.",
+          ],
+        },
+        {
+          title: "What you can do",
+          bullets: [
+            "**List** bookings with combinable filters by state, date range, guest name and accommodation name.",
+            "See a booking's **detail** with its event history as a timeline.",
+            "**Create** bookings with browser and server validation.",
+            "**Cancel** bookings from the list, one at a time or several at once, with confirmation.",
+            "**Confirm or cancel** with controlled transitions: a cancelled booking can't change again.",
+          ],
+        },
+        {
+          title: "Architecture",
+          paragraphs: [
+            "Layered backend, with the core pieces built by hand: router, request, JSON responses, error handler and translator.",
+          ],
+          bullets: [
+            "**Controllers**: translate HTTP into service calls.",
+            "**Service**: business rules, with the allowed states and transitions.",
+            "**Validator**: server-side validation against allow-lists.",
+            "**Repository**: the only place with SQL.",
+          ],
+        },
+        {
+          title: "API routes",
+          table: {
+            head: ["Method", "Route", "Description"],
+            rows: [
+              ["GET", "`/api/reservas`", "List with combinable filters"],
+              ["GET", "`/api/reservas/{id}`", "Detail with its event history"],
+              ["POST", "`/api/reservas`", "Creates a booking in pending state"],
+              ["PATCH", "`/api/reservas/{id}/estado`", "Confirms or cancels a booking"],
+            ],
+          },
+          paragraphs: ["Responses are JSON with consistent HTTP status codes (200, 201, 400, 404, 405, 409, 422 and 500) and per-field errors."],
+        },
+        {
+          title: "Security and quality",
+          bullets: [
+            "**PDO** prepared statements and server-side validation.",
+            "**Twig** templates with autoescaping and no `|raw` anywhere.",
+            "`Content-Security-Policy`, `X-Content-Type-Options` and `X-Frame-Options` headers.",
+            "**16 PHPUnit tests** against the real database, inside a transaction that is rolled back.",
+          ],
+        },
+        {
+          title: "Stack",
+          bullets: [
+            "**Frontend**: Twig 3 views and vanilla JavaScript with ES modules. The filters also work without JavaScript.",
+            "**Backend**: PHP 8.2+ with PSR-4 autoloading and Composer.",
+            "**Data**: MySQL/MariaDB with two tables, CHECK constraints and a transaction to save the booking and its event. Includes 50 sample bookings.",
+          ],
+        },
+        {
+          title: "Deployment",
+          bullets: [
+            "Published on **InfinityFree**, a free hosting service with PHP and MySQL, with a custom subdomain and SSL certificate.",
+            "An `.htaccess` file exposes only `frontend/` and blocks `backend/` and `database/`.",
+            "Connection settings live in an `.env` file on the server, outside Git.",
+          ],
+        },
+      ],
     },
   },
   {
     id: 4,
     title: "Portfolio Web",
     description: {
-      es: "Portafolio personal 2026 rediseñado en React. SPA totalmente responsive con navegación suave, árbol de habilidades interactivo con D3.js, animaciones con Framer Motion y formulario de contacto integrado con EmailJS.",
-      en: "2026 personal portfolio redesigned in React. Fully responsive SPA with smooth navigation, an interactive skill tree built with D3.js, Framer Motion animations and a contact form integrated with EmailJS.",
+      es: "Mi portafolio personal de 2026: quién soy, qué he estudiado y los proyectos que he construido, en español e inglés.",
+      en: "My 2026 personal portfolio: who I am, what I have studied and the projects I have built, in Spanish and English.",
     },
-    images: [
-      "/img/portafolio-2026/portafolio2026_1.png",
-    ],
+    images: ["/img/portafolio-2026/portafolio2026_1.png"],
     tags: ["React", "Vite", "Three.js", "D3.js", "Framer Motion", "EmailJS", "CSS3"],
     tagIcons: [
       "fa-brands fa-react",
@@ -295,19 +662,87 @@ export const projects = [
     ],
     github: "https://github.com/noemmang/portafolio_2026.git",
     live: "https://www.noemmang.com",
-    details: {
-      es: {
-        frontend: "SPA construida en React 18 con Vite como bundler. Arquitectura basada en componentes funcionales y hooks (useState, useEffect, useRef). Animaciones de entrada y transiciones con Framer Motion usando useInView para activarlas al hacer scroll. Navegación entre secciones con scroll suave y detección de sección activa. CSS modular por componente con variables globales, totalmente responsive con CSS Grid y Flexbox.",
-        visualization: "Árbol de habilidades construido con D3.js usando d3.stratify() y d3.tree() en layout radial. Soporta zoom y pan nativo de D3, tooltips personalizados y animación de pulso CSS en nodos activos. Los nodos y conexiones se colorean por categoría (frontend, backend, tools) y estado (aprendido / pendiente).",
-        contact: "Formulario de contacto integrado con EmailJS (@emailjs/browser). Validación nativa HTML5, feedback visual de estado (enviando / éxito / error) con animaciones Framer Motion y reset automático tras envío exitoso.",
-        deployment: "Proyecto configurado con Vite para build de producción optimizado. Preparado para despliegue en Netlify o Vercel desde la carpeta dist/.",
-      },
-      en: {
-        frontend: "SPA built with React 18 using Vite as the bundler. Component-based architecture with functional components and hooks (useState, useEffect, useRef). Entry animations and transitions with Framer Motion, using useInView to trigger them on scroll. Smooth-scroll navigation between sections with active-section detection. Modular CSS per component with global variables, fully responsive with CSS Grid and Flexbox.",
-        visualization: "Skill tree built with D3.js using d3.stratify() and d3.tree() in a radial layout. Supports D3's native zoom and pan, custom tooltips and a CSS pulse animation on active nodes. Nodes and connections are colored by category (frontend, backend, tools) and status (learned / pending).",
-        contact: "Contact form integrated with EmailJS (@emailjs/browser). Native HTML5 validation, visual status feedback (sending / success / error) with Framer Motion animations, and automatic reset after a successful submission.",
-        deployment: "Project configured with Vite for an optimized production build. Ready for deployment on Netlify or Vercel from the dist/ folder.",
-      },
+    readme: {
+      es: [
+        {
+          title: "¿Qué es?",
+          paragraphs: [
+            "Mi portafolio personal, rediseñado en 2026. Reúne en una sola página mi presentación, formación, experiencia, habilidades, certificados, proyectos y un formulario de contacto.",
+          ],
+        },
+        {
+          title: "Objetivo",
+          paragraphs: ["Esto es lo que buscaba aprender:"],
+          bullets: [
+            "**React**: construir una web completa con componentes y hooks.",
+            "**Varios idiomas**: ofrecer todo el contenido en español e inglés con cambio de idioma.",
+            "**Presentación**: contar de forma clara quién soy y qué he construido.",
+          ],
+        },
+        {
+          title: "Qué incluye",
+          bullets: [
+            "**Árbol de habilidades** interactivo hecho con D3.js, con zoom, arrastre y nodos coloreados por categoría y estado (aprendido o pendiente).",
+            "**Escena 3D** en la portada con Three.js.",
+            "**Formulario de contacto** con EmailJS y validación, con estados de envío visibles.",
+            "**Idioma** en español e inglés, con textos revisados a mano.",
+            "Animaciones de entrada al hacer scroll con Framer Motion.",
+            "Diseño totalmente responsive.",
+          ],
+        },
+        {
+          title: "Stack",
+          bullets: [
+            "**React** con Vite, componentes funcionales y hooks.",
+            "**CSS** modular por componente, con variables globales, Grid y Flexbox.",
+            "**D3.js**, **Three.js** y **Framer Motion** para visualización, 3D y animación.",
+          ],
+        },
+        {
+          title: "Publicación",
+          bullets: ["Publicado en **www.noemmang.com**, con build de producción optimizado con Vite."],
+        },
+      ],
+      en: [
+        {
+          title: "What is it?",
+          paragraphs: [
+            "My personal portfolio, redesigned in 2026. It brings together my introduction, education, experience, skills, certificates, projects and a contact form on a single page.",
+          ],
+        },
+        {
+          title: "Goal",
+          paragraphs: ["This is what I wanted to learn:"],
+          bullets: [
+            "**React**: building a complete website with components and hooks.",
+            "**Multiple languages**: offering all the content in Spanish and English with a language switch.",
+            "**Presentation**: telling clearly who I am and what I have built.",
+          ],
+        },
+        {
+          title: "What it includes",
+          bullets: [
+            "An interactive **skill tree** built with D3.js, with zoom, drag and nodes colored by category and status (learned or pending).",
+            "A **3D scene** on the landing section with Three.js.",
+            "A **contact form** with EmailJS and validation, with visible sending states.",
+            "**Language** switch between Spanish and English, with hand-reviewed texts.",
+            "Scroll-triggered entry animations with Framer Motion.",
+            "Fully responsive design.",
+          ],
+        },
+        {
+          title: "Stack",
+          bullets: [
+            "**React** with Vite, functional components and hooks.",
+            "**CSS** modular per component, with global variables, Grid and Flexbox.",
+            "**D3.js**, **Three.js** and **Framer Motion** for visualization, 3D and animation.",
+          ],
+        },
+        {
+          title: "Publishing",
+          bullets: ["Published at **www.noemmang.com**, with an optimized production build from Vite."],
+        },
+      ],
     },
   },
 ];

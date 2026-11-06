@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { projects } from "../../data/portfolio";
 import { useLanguage } from "../../i18n/LanguageContext";
+import Readme from "./Readme";
 import "./Projects.css";
 
 // ── Carousel ──────────────────────────────────────────────────────────────────
@@ -74,7 +75,7 @@ function ImageCarousel({ images, title }) {
 // ── Details Modal ─────────────────────────────────────────────────────────────
 function DetailsModal({ project, onClose }) {
   const { lang, t } = useLanguage();
-  const details = project.details[lang];
+  const sections = project.readme[lang];
 
   // Close on Escape
   useEffect(() => {
@@ -107,7 +108,7 @@ function DetailsModal({ project, onClose }) {
           {/* Header */}
           <div className="modal-panel__header">
             <div>
-              <p className="modal-panel__subtitle">{t("projects.technicalDetails")}</p>
+              <p className="modal-panel__subtitle">{t("projects.about")}</p>
               <h3 className="modal-panel__title">{project.title}</h3>
             </div>
             <button className="modal-panel__close" onClick={onClose}>
@@ -127,20 +128,7 @@ function DetailsModal({ project, onClose }) {
             )}
           </div>
 
-          {/* Details */}
-          <div className="modal-panel__details">
-            {Object.entries(details).map(([k, v]) => (
-              <div className="modal-detail" key={k}>
-                <span className="modal-detail__key">
-                  <i className="fa-solid fa-chevron-right" />
-                  {t(`projects.detailLabels.${k}`)}
-                </span>
-                <p className="modal-detail__val">{v}</p>
-              </div>
-            ))}
-          </div>
-
-          {/* Tags */}
+          {/* Stack */}
           <div className="modal-panel__tags">
             {project.tags.map((tag, i) => (
               <span className="tag" key={i}>
@@ -149,6 +137,9 @@ function DetailsModal({ project, onClose }) {
               </span>
             ))}
           </div>
+
+          {/* README */}
+          <Readme sections={sections} />
         </motion.div>
       </motion.div>
     </AnimatePresence>
@@ -179,7 +170,7 @@ function ProjectCard({ project, index, inView }) {
                   <button
                     className="proj-btn proj-btn--info"
                     onClick={() => setModalOpen(true)}
-                    title={t("projects.technicalDetails")}
+                    title={t("projects.about")}
                   >
                     <i className="fa-solid fa-circle-info" />
                   </button>
